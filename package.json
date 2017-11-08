@@ -22,7 +22,7 @@
     "aeson"
   ],
   "author": "mchaver",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/plow-technologies/bs-aeson-spec/issues"
   },
