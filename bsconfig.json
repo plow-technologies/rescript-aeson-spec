@@ -1,0 +1,10 @@
+{
+  "name": "bs-aeson-spec",
+  "bsc-flags": ["-bs-no-version-header", "-bs-super-errors"],
+  "sources": [{
+    "dir":    "src",
+    "subdirs": true
+  }],
+  "bs-dependencies": ["bs-aeson", "bs-node-fetch"],
+  "bs-dev-dependencies": ["bs-jest"]
+}
