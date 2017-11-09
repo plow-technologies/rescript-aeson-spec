@@ -7,6 +7,12 @@ module Test = struct
       ; ( "age", Aeson.Encode.int p.age)
       ]
 
+  let brokenEncodePerson (p : person) :Js_json.t =
+    Aeson.Encode.object_
+      [ ( "Name", Aeson.Encode.string p.name)
+      ; ( "Age", Aeson.Encode.int p.age)
+      ]
+
   let decodePerson (json : Js_json.t) :(person, string) Js_result.t =
     match Aeson.Decode.
           { name = field "name" string json
@@ -17,7 +23,14 @@ module Test = struct
     | exception Aeson.Decode.DecodeError message -> Js_result.Error ("decodePerson: " ^ message)
 end
 
+(* need to turn on servant server before running *)
 let () =
-  Js.log "Hello";
-         (* let javier : person = { name : "Javier" ; age : 45 } *)
-  Aeson2.Spec.file_roundtrip "person" "__tests__/person.json" Test.decodePerson Test.encodePerson;
+  let person : Test.person = {name = "Javier" ; age = 50} in
+  AesonSpec.server_roundtrip "person" person "http://localhost:8081/person" Test.decodePerson Test.encodePerson;
+  AesonSpec.file_roundtrip "person" "__tests__/person.json" Test.decodePerson Test.encodePerson;
+
+  (* can run tests this way yet since Jest does not expost the assert type constructor
+  describe "" (fun () -> test "" (fun () ->
+    expect (AesonSpec.file_roundtrip2 "__tests__/person.json" Test.decodePerson Test.brokenEncodePerson) |> toEqual (Ok)
+  ))
+   *)

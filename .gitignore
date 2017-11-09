@@ -4,3 +4,4 @@ lib/*
 .merlin
 npm-debug.log
 .DS_Store
+server/.stack-work
