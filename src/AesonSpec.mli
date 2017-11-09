@@ -1,6 +1,10 @@
 val server_roundtrip : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> 'a -> unit
 
 (** Test a decoder and encoder of a type for a given value against a test server *)
+
+val server_roundtrip_set : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> 'a list -> unit
+
+(** Test a decoder and encoder of a type for a list of values against a test server *)
   
 val file_roundtrip : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> unit
 

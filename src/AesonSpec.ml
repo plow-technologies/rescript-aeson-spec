@@ -2,7 +2,7 @@ open Jest
 open Expect
 
 external toJsObject : 'a Js.Dict.t -> < .. > Js.t = "%identity"
-
+  
 let server_roundtrip decode encode name_of_type url value_of_type  = (
   let headers = Bs_node_fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
   let encodedString = Js.Json.stringify (encode value_of_type) in
@@ -19,12 +19,15 @@ let server_roundtrip decode encode name_of_type url value_of_type  = (
       Js.Promise.(
         Bs_node_fetch.fetchWithInit url reqInit
           |> then_ (fun response -> (Bs_node_fetch.Response.text response)
-          |> then_ (fun text -> resolve (expect (decode (Js.Json.parseExn text)) |> toEqual (Js_result.Ok value_of_type)))
+          |> then_ (fun text -> Js.log text; resolve (expect (decode (Js.Json.parseExn text)) |> toEqual (Js_result.Ok value_of_type)))
         )
       )
     )
   )
 )
+
+let server_roundtrip_set decode encode name_of_type url values_of_type =
+  List.iter (fun (value_of_type) -> server_roundtrip decode encode name_of_type url value_of_type) values_of_type
 
 let file_roundtrip decode encode name_of_type json_file  = (
   let mapJsResult f r = (

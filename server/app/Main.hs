@@ -29,7 +29,17 @@ data Person =
 instance ToJSON Person
 instance FromJSON Person
 
-type TestAPI = "person" :> ReqBody '[JSON] Person :> Post '[JSON] Person
+data Company =
+  Company
+    { companyName :: String
+    , employees :: [Person]
+    } deriving (Eq,Show,Generic)
+
+instance ToJSON Company
+instance FromJSON Company
+
+type TestAPI = "person"  :> ReqBody '[JSON] Person  :> Post '[JSON] Person
+          :<|> "company" :> ReqBody '[JSON] Company :> Post '[JSON] Company
 
 testAPI :: Proxy TestAPI
 testAPI = Proxy
@@ -39,6 +49,10 @@ server = (\person -> do
              liftIO $ print "person route called"
              liftIO $ print person
              return person)
+    :<|> (\company -> do
+             liftIO $ print "company route called"
+             liftIO $ print company
+             return company)
 
 app :: Application
 app = serve testAPI server
