@@ -32,7 +32,7 @@ let roundtrip decode encode json =
   let rDecoded = decode json in
   expect (result_map encode rDecoded) |> toEqual (Js_result.Ok json)
 
-let server_roundtrip decode encode name_of_type url value_of_type  = (
+let server_test decode encode url value_of_type  = (
   let headers = Bs_node_fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
   let encodedString = Js.Json.stringify (encode value_of_type) in
   let reqInit = 
@@ -43,14 +43,20 @@ let server_roundtrip decode encode name_of_type url value_of_type  = (
       ~headers:headers
       () in
   
+
+  Js.Promise.(
+    Bs_node_fetch.fetchWithInit url reqInit
+      |> then_ (fun response -> (Bs_node_fetch.Response.text response)
+      |> then_ (fun text -> resolve (expect (decode (Js.Json.parseExn text)) |> toEqual (Js_result.Ok value_of_type)))
+    )
+  )
+)
+  
+let server_roundtrip decode encode name_of_type url value_of_type = (
+  let encodedString = Js.Json.stringify (encode value_of_type) in
   describe ("AesonSpec.server_roundtrip: " ^ name_of_type) (fun () ->
     testPromise ("send to and receive from server: " ^ encodedString) (fun () ->
-      Js.Promise.(
-        Bs_node_fetch.fetchWithInit url reqInit
-          |> then_ (fun response -> (Bs_node_fetch.Response.text response)
-          |> then_ (fun text -> Js.log text; resolve (expect (decode (Js.Json.parseExn text)) |> toEqual (Js_result.Ok value_of_type)))
-        )
-      )
+      server_test decode encode url value_of_type
     )
   )
 )
@@ -68,25 +74,28 @@ let file_roundtrip decode encode name_of_type json_file  = (
 )
 
 
-let sample_roundtrip decode encode name_of_type json_file =
+let sample_roundtrip decode encode name_of_type json_file = (
   let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
   
   match (decode_sample json) with
-  | Js_result.Ok sample -> describe "" (fun () -> 
-      List.iter (fun sample -> test "samples" (fun () -> roundtrip decode encode sample)) (Array.to_list sample.samples));
-  | Js_result.Error error -> describe "" (fun () -> test "" (fun () -> fail error));
+  | Js_result.Ok sample -> describe name_of_type (fun () -> 
+      List.iter (fun sample -> test "samples" (fun () -> roundtrip decode encode sample)) (Array.to_list sample.samples))
+  | Js_result.Error error -> describe "" (fun () -> test "" (fun () -> fail error))
+  )
 
 
-(*
-let golden decode encode name_of_type json_file =
+let golden decode encode name_of_type url json_file = (
   let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
-  let samples = (decode_sample_unsafe json).samples in
-  roundtrip json;
-  *)
-(*
-let sample_roundtrip decode encode =
-  let s = decode_sample json_file in
- *)  
+  
+  match (decode_sample json) with
+  | Js_result.Ok sample ->
+     describe ("golden test for: " ^ name_of_type) (fun () -> 
+      List.iter (fun sample -> test "file" (fun () -> roundtrip decode encode sample);
+                               testPromise "server" (fun () -> server_test decode encode url (Aeson.Decode.unwrapResult (decode sample)));)
+                (Array.to_list sample.samples))
+  | Js_result.Error error -> describe "" (fun () -> test "" (fun () -> fail error))
+  )
+
 (* use this if we can match on Jest.assert constructors
 let file_roundtrip2 file decode encode = (
   let mapJsResult f r = (
