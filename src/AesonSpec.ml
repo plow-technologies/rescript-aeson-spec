@@ -31,14 +31,20 @@ type 'a ssample =
 let decode_ssample_unsafe decode json =
   Aeson.Decode.
     { seed = field "seed" float json
-    ; samples = field "samples" (list decode) json
+    ; samples = field "samples" (list (fun a -> unwrapResult (decode a))) json
     }
 
-let decode_ssample json =
-  match decode_sample_unsafe json with
+let decode_ssample decode json =
+  match decode_ssample_unsafe decode json with
   | v -> Js_result.Ok v
   | exception Aeson.Decode.DecodeError message -> Js_result.Error ("decode_sample: " ^ message)
 
+let encode_ssample encode sample =
+  Aeson.Encode.object_
+    [ ( "seed",  Aeson.Encode.float sample.seed )
+    ; ( "samples", Aeson.Encode.list encode sample.samples )
+    ]
+                                                
 let result_map f r = (
   match r with
   | Js_result.Ok(a) -> Js_result.Ok (f a)
@@ -117,13 +123,35 @@ let golden decode encode name_of_type url json_file = (
 let ggolden decode encode name_of_type url json_file = (
   let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
   
-  match (decode_sample json) with
+  match (decode_ssample decode json) with
   | Js_result.Ok sample ->
      describe ("golden test for: " ^ name_of_type) (fun () ->
-       test "" (fun () ->
-         let decoded = List.map (fun a -> Aeson.Decode.unwrapResult (decode a)) (Array.to_list sample.samples) in
-         expect (List.map encode decoded) |> toEqual (Array.to_list sample.samples);
-       )
+       let decoded = sample.samples in
+       let encoded = (encode_ssample encode sample) in
+       test "golden file" (fun () ->
+         expect (encoded) |> toEqual (json);
+       );
+
+       testPromise "server" (fun () ->
+         let headers = Bs_node_fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
+         let encodedString = Js.Json.stringify (Aeson.Encode.list encode sample.samples) in
+         let reqInit = 
+           Bs_node_fetch.RequestInit.make
+             ~method_:Bs_node_fetch.Post
+             ~mode:Bs_node_fetch.CORS
+             ~body:(Bs_node_fetch.BodyInit.make encodedString)
+             ~headers:headers
+             () in
+  
+
+         Js.Promise.(
+           Bs_node_fetch.fetchWithInit url reqInit
+           |> then_ (fun response -> (Bs_node_fetch.Response.text response)
+           |> then_ (fun text -> resolve (expect ((Aeson.Decode.list (fun a -> Aeson.Decode.unwrapResult (decode a)) (Js.Json.parseExn text))) |> toEqual sample.samples))
+           )
+         )
+       );
+ 
               (* test "file" (fun () -> roundtrip (Aeson.Decode.list decode) (Aeson.Encode.list encode) payload); *)
               (*        testPromise "server" (fun () -> server_test decode encode url (Aeson.Decode.unwrapResult (decode sample)));)*)
      )

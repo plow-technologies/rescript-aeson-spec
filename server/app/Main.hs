@@ -91,12 +91,12 @@ server = (\person -> do
              return company)
     :<|> (\people -> do
              liftIO $ print "people route called"
-             result <- liftIO $ cWithGolden "../__tests__/golden/people.json" people
+             result <- liftIO $ cWithGolden "../__tests__/golden/Person.json" people
              liftIO $ print result
              return people)
     :<|> (\companies -> do
              liftIO $ print "companies route called"
-             result <- liftIO $ cWithGolden "../__tests__/golden/companies.json" companies
+             result <- liftIO $ cWithGolden "../__tests__/golden/Company.json" companies
              liftIO $ print result
              return companies)
 
