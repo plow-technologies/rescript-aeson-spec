@@ -1,8 +1,78 @@
 open Jest
 open Expect
 
+external _unsafeCreateUninitializedArray : int -> 'a array = "Array" [@@bs.new]
+
+(*                                                           
+let aarray json :Js_json.t array = 
+  (*  if Js.Array.isArray json then begin *)
+  (Obj.magic (json : Js.Json.t) : Js.Json.t array)
+  *)    
+
+let aarray json = 
+  if Js.Array.isArray json then begin
+    let source = (Obj.magic (json : Js.Json.t) : Js.Json.t array) in
+    let length = Js.Array.length source in
+    let target = _unsafeCreateUninitializedArray length in
+(*    
+    for i = 0 to length - 1 do
+      let value = decode (Array.unsafe_get source i) in
+      Array.unsafe_set target i value;
+    done;
+ *)
+    target
+  end
+  else
+    raise @@ Aeson.Decode.DecodeError ("Expected array, got " ^ Js.Json.stringify json)
+
 external toJsObject : 'a Js.Dict.t -> < .. > Js.t = "%identity"
+
+type sample =
+  { seed : int
+  ; samples : Js_json.t array
+  }
   
+let decode_sample_unsafe json =
+  Aeson.Decode.
+    { seed = field "seed" int json
+    ; samples = (match (field "samples" Js.Json.decodeArray json) with
+                 | Some v -> v
+                 | None -> raise @@ Aeson.Decode.DecodeError "invalid array"
+                )
+    }
+
+let decode_sample json =
+  match decode_sample_unsafe json with
+  | v -> Js_result.Ok v
+  | exception Aeson.Decode.DecodeError message -> Js_result.Error ("decode_sample: " ^ message)
+
+  (*
+type 'a sample =
+  { seed : int
+  ; samples : 'a list
+  }
+
+let decode_sample_unsafe decode json =
+  Aeson.Decode.
+    { seed = field "seed" int json
+    ; samples = field "samples" (list (fun a -> unwrapResult (decode a))) json
+    }
+  
+let decode_sample decode json =
+  match decode_sample_unsafe decode json with
+  | v -> Js_result.Ok v
+  | exception Aeson.Decode.DecodeError message -> Js_result.Error ("decode_sample: " ^ message)
+                                                  *)                                                
+let result_map f r = (
+  match r with
+  | Js_result.Ok(a) -> Js_result.Ok (f a)
+  | Js_result.Error(b) -> Js_result.Error (b)
+)
+                                                
+let roundtrip decode encode json =
+  let rDecoded = decode json in
+  expect (result_map encode rDecoded) |> toEqual (Js_result.Ok json)
+
 let server_roundtrip decode encode name_of_type url value_of_type  = (
   let headers = Bs_node_fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
   let encodedString = Js.Json.stringify (encode value_of_type) in
@@ -30,21 +100,34 @@ let server_roundtrip_set decode encode name_of_type url values_of_type =
   List.iter (fun (value_of_type) -> server_roundtrip decode encode name_of_type url value_of_type) values_of_type
 
 let file_roundtrip decode encode name_of_type json_file  = (
-  let mapJsResult f r = (
-    match r with
-    | Js_result.Ok(a) -> Js_result.Ok (f a)
-    | Js_result.Error(b) -> Js_result.Error (b)
-  ) in
-
   describe ("AesonSpec.file_roundtrip: " ^ name_of_type ^ " from file '" ^ json_file ^ "'") (fun () ->
     let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
     test ("decode then encode: " ^ (Js.Json.stringify json)) (fun () ->
-      let rDecoded = decode json in
-      expect (mapJsResult encode rDecoded) |> toEqual (Js_result.Ok json)
+      roundtrip decode encode json
     )
   );
 )
 
+
+let golden decode encode name_of_type json_file =
+  let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
+  
+  match (decode_sample json) with
+  | Js_result.Ok sample -> describe "" (fun () -> 
+      List.iter (fun sample -> test "samples" (fun () -> Js.log sample; roundtrip decode encode sample)) (Array.to_list sample.samples));
+  | Js_result.Error error -> describe "" (fun () -> test "" (fun () -> fail error));
+
+
+(*
+let golden decode encode name_of_type json_file =
+  let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
+  let samples = (decode_sample_unsafe json).samples in
+  roundtrip json;
+  *)
+(*
+let sample_roundtrip decode encode =
+  let s = decode_sample json_file in
+ *)  
 (* use this if we can match on Jest.assert constructors
 let file_roundtrip2 file decode encode = (
   let mapJsResult f r = (

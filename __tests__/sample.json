@@ -1,0 +1,9 @@
+{ "seed" : 1
+, "samples" : [
+   { "name" : "Javier"
+   , "age" : 45
+   }
+  ,{ "name" : "Juan"
+   , "age" : 23
+   }
+]}
