@@ -1,5 +1,5 @@
 type sample =
-  { seed : int
+  { seed : float
   ; samples : Js_json.t array
   }
 
@@ -20,7 +20,7 @@ val file_roundtrip : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t
 (** test a decoder and encoder of a type against a json value in a file *)
 
 
-val golden : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> unit
+val sample_roundtrip : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> unit
 (*
 val file_roundtrip2 : string -> (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> ((Js.Json.t, string) Js.Result.t) Jest.assertion
  *)

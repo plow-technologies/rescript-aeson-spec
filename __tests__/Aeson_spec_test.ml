@@ -55,7 +55,7 @@ let () =
   *)
   AesonSpec.file_roundtrip Test.decodePerson Test.encodePerson "person" "__tests__/person.json";
   
-  AesonSpec.golden Test.decodePerson Test.encodePerson "person" "__tests__/sample.json";
+  AesonSpec.sample_roundtrip Test.decodePerson Test.encodePerson "person" "__tests__/sample.json";
   (* can run tests this way yet since Jest does not expost the assert type constructor
   describe "" (fun () -> test "" (fun () ->
     expect (AesonSpec.file_roundtrip2 "__tests__/person.json" Test.decodePerson Test.brokenEncodePerson) |> toEqual (Ok)
