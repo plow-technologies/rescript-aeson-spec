@@ -17,6 +17,11 @@ executable server
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , aeson
+                     , bytestring
+                     , directory
+                     , hspec-golden-aeson
+                     , quickcheck-arbitrary-adt
+                     , QuickCheck
                      , servant
                      , servant-server
                      , wai

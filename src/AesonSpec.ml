@@ -22,6 +22,23 @@ let decode_sample json =
   | v -> Js_result.Ok v
   | exception Aeson.Decode.DecodeError message -> Js_result.Error ("decode_sample: " ^ message)
 
+
+type 'a ssample =
+  { seed : float
+  ; samples : 'a list
+  }
+  
+let decode_ssample_unsafe decode json =
+  Aeson.Decode.
+    { seed = field "seed" float json
+    ; samples = field "samples" (list decode) json
+    }
+
+let decode_ssample json =
+  match decode_sample_unsafe json with
+  | v -> Js_result.Ok v
+  | exception Aeson.Decode.DecodeError message -> Js_result.Error ("decode_sample: " ^ message)
+
 let result_map f r = (
   match r with
   | Js_result.Ok(a) -> Js_result.Ok (f a)
@@ -96,7 +113,29 @@ let golden decode encode name_of_type url json_file = (
   | Js_result.Error error -> describe "" (fun () -> test "" (fun () -> fail error))
   )
 
+
+let ggolden decode encode name_of_type url json_file = (
+  let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
+  
+  match (decode_sample json) with
+  | Js_result.Ok sample ->
+     describe ("golden test for: " ^ name_of_type) (fun () ->
+       test "" (fun () ->
+         let decoded = List.map (fun a -> Aeson.Decode.unwrapResult (decode a)) (Array.to_list sample.samples) in
+         expect (List.map encode decoded) |> toEqual (Array.to_list sample.samples);
+       )
+              (* test "file" (fun () -> roundtrip (Aeson.Decode.list decode) (Aeson.Encode.list encode) payload); *)
+              (*        testPromise "server" (fun () -> server_test decode encode url (Aeson.Decode.unwrapResult (decode sample)));)*)
+     )
+  | Js_result.Error error -> describe "" (fun () -> test "" (fun () -> fail error))
+  )
+
 (* use this if we can match on Jest.assert constructors
+let roundtrip decode encode json =
+  let rDecoded = decode json in
+  expect (result_map encode rDecoded) |> toEqual (Js_result.Ok json)
+
+
 let file_roundtrip2 file decode encode = (
   let mapJsResult f r = (
     match r with

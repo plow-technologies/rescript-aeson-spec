@@ -3,6 +3,11 @@ type sample =
   ; samples : Js_json.t array
   }
 
+type 'a ssample =
+  { seed : float
+  ; samples : 'a list
+  }
+
 val decode_sample_unsafe : Js_json.t -> sample
   
 val decode_sample : Js_json.t -> (sample, string) Js_result.t
@@ -26,3 +31,4 @@ val golden : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> str
 (*
 val file_roundtrip2 : string -> (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> ((Js.Json.t, string) Js.Result.t) Jest.assertion
  *)
+val ggolden : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> string -> unit
