@@ -1,34 +1,29 @@
-type sample =
-  { seed : float
-  ; samples : Js_json.t array
-  }
-
-type 'a ssample =
+type 'a sample =
   { seed : float
   ; samples : 'a list
   }
-
-val decode_sample_unsafe : Js_json.t -> sample
   
-val decode_sample : Js_json.t -> (sample, string) Js_result.t
+val decodeSampleUnsafe : (Js_json.t -> ('a, string) Js_result.t) -> Js_json.t -> 'a sample
 
-val server_roundtrip : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> 'a -> unit
+val decodeSample : (Js_json.t -> ('a, string) Js_result.t) -> Js_json.t -> ('a sample, string) Js_result.t
 
-(** Test a decoder and encoder of a type for a given value against a test server *)
+val encodeSample : ('a -> Js_json.t) -> 'a sample -> Js_json.t
 
-val server_roundtrip_set : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> 'a list -> unit
-
-(** Test a decoder and encoder of a type for a list of values against a test server *)
   
-val file_roundtrip : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> unit
+(* specs *)  
 
-(** test a decoder and encoder of a type against a json value in a file *)
+val jsonRoundtripSingleSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> Js_json.t -> (Js_json.t, string) Js.Result.t Jest.assertion
+  
+val jsonRoundtripSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> Js_json.t -> (Js_json.t, string) Js.Result.t Jest.assertion
+  
+val valueRoundtripSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> 'a -> ('a, string) Js.Result.t Jest.assertion
 
+val goldenSingleSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> unit
+  
+val goldenSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> unit
 
-val sample_roundtrip : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> unit
+val serverSingleSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> 'a -> unit
+  
+val serverSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> 'a list -> unit
 
-val golden : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> string -> unit
-(*
-val file_roundtrip2 : string -> (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> ((Js.Json.t, string) Js.Result.t) Jest.assertion
- *)
-val ggolden : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> string -> unit
+val goldenAndServerSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> string -> unit  
