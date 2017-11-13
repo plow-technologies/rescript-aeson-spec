@@ -5,25 +5,46 @@ type 'a sample =
   
 val decodeSampleUnsafe : (Js_json.t -> ('a, string) Js_result.t) -> Js_json.t -> 'a sample
 
+(** decode sample from a JSON but throw an exception if it is unable to decode *)
+  
 val decodeSample : (Js_json.t -> ('a, string) Js_result.t) -> Js_json.t -> ('a sample, string) Js_result.t
 
+(** decode sample from a JSON and return it as Js_result *)
+  
 val encodeSample : ('a -> Js_json.t) -> 'a sample -> Js_json.t
 
+(** encode sample into a JSON *)
   
 (* specs *)  
 
-val jsonRoundtripSingleSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> Js_json.t -> (Js_json.t, string) Js.Result.t Jest.assertion
-  
 val jsonRoundtripSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> Js_json.t -> (Js_json.t, string) Js.Result.t Jest.assertion
+
+(** try to encode and decode a JSON *)
+  
+val sampleJsonRoundtripSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> Js_json.t -> (Js_json.t, string) Js.Result.t Jest.assertion
+
+(** try to encode and decode a sample JSON of a type *)
   
 val valueRoundtripSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> 'a -> ('a, string) Js.Result.t Jest.assertion
 
-val goldenSingleSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> unit
+(** try to encode and decode a value of a type *)
   
 val goldenSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> unit
 
-val serverSingleSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> 'a -> unit
+(** decode and encode a golden file *)
   
-val serverSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> 'a list -> unit
+val sampleGoldenSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> unit
 
-val goldenAndServerSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> string -> unit  
+(** decode and encode a golden file for a sample of a type *)
+  
+val serverSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> 'a -> unit
+
+(** encode a value, POST it to a test server, receive a response and decode the response *)
+  
+val sampleServerSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> 'a list -> unit
+
+(** encode a sample of a type, POST it to a test server, receive a response and decode the response *)
+  
+val sampleGoldenAndServerSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> string -> unit  
+
+(** goldeSpec and sampleServerSpec *)  

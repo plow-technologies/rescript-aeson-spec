@@ -47,20 +47,12 @@ let () =
   let person3 : Test.person = {name = "Jordi" ; age = 23} in
   let company : Test.company = {companyName = "Acme" ; employees = [person ; person2 ; person3]  } in
 
-  AesonSpec.goldenSingleSpec Test.decodePerson Test.encodePerson "person" "__tests__/person.json";
+  AesonSpec.goldenSpec Test.decodePerson Test.encodePerson "person" "__tests__/person.json";
 
-  AesonSpec.serverSingleSpec Test.decodePerson Test.encodePerson "person" "http://localhost:8081/person" person;
+  AesonSpec.serverSpec Test.decodePerson Test.encodePerson "person" "http://localhost:8081/person" person;
 
-  AesonSpec.serverSingleSpec Test.decodeCompany Test.encodeCompany "company" "http://localhost:8081/company" company;
+  AesonSpec.serverSpec Test.decodeCompany Test.encodeCompany "company" "http://localhost:8081/company" company;
 
-  AesonSpec.goldenAndServerSpec Test.decodePerson Test.encodePerson "person" "http://localhost:8081/people" "__tests__/golden/Person.json";
-  (*
-  AesonSpec.serverSpec Test.decodePerson Test.encodePerson "person" "http://localhost:8081/person" [person ; person2 ; person3];
-  
+  AesonSpec.sampleGoldenAndServerSpec Test.decodePerson Test.encodePerson "person" "http://localhost:8081/people" "__tests__/golden/Person.json";
 
-  *)
-
-(*
-
-
-  *)
+  AesonSpec.sampleGoldenAndServerSpec Test.decodeCompany Test.encodeCompany "person" "http://localhost:8081/companies" "__tests__/golden/Company.json";
