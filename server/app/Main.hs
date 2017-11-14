@@ -33,18 +33,6 @@ import Test.Aeson.Internal.Utils
 import Data.ByteString.Lazy (writeFile, readFile)
 import Prelude hiding (readFile)
 
-mk :: forall a. (Eq a, Show a, FromJSON a, ToJSON a, ToADTArbitrary a) => FilePath -> Proxy a -> IO ()
-mk goldenPath Proxy = do
-  (typeName, constructors) <- fmap (adtTypeName &&& adtCAPs) <$> generate $ toADTArbitrary (Proxy :: Proxy a)
-  mapM_
-    (\constructor -> do
-        let goldenFilePath = goldenPath <> "/" <> typeName <> ".json"
-        exists <- doesFileExist goldenFilePath
-        if exists
-          then pure ()
-          else createGoldenFile 100 constructor goldenFilePath
-    ) constructors
-
 data Person =
   Person
     { name :: String
@@ -107,39 +95,12 @@ cWithGolden goldenFile as = do
   case eGoldenSamples of
     Left _ -> return False
     Right goldenSamples -> return $ (samples goldenSamples) == as
-  -- goldenSeed <- readSeed =<< readFile goldenFile
-  -- sampleSize <- readSampleSize =<< readFile goldenFile
-  -- newSamples <- mkRandomADTSamplesForConstructor sampleSize (Proxy :: Proxy a) (capConstructor cap) goldenSeed
-{-
-compareWithGolden :: forall a. (Show a, Eq a, FromJSON a, ToJSON a, ToADTArbitrary a) =>
-  String -> Maybe String -> String -> ConstructorArbitraryPair a -> FilePath -> IO ()
-compareWithGolden topDir mModuleName typeName cap goldenFile = do
-  goldenSeed <- readSeed =<< readFile goldenFile
-  sampleSize <- readSampleSize =<< readFile goldenFile
-  newSamples <- mkRandomADTSamplesForConstructor sampleSize (Proxy :: Proxy a) (capConstructor cap) goldenSeed
-  whenFails (writeComparisonFile newSamples) $ do
-    goldenSamples :: RandomSamples a <-
-      either (throwIO . ErrorCall) return =<<
-      A.eitherDecode' <$>
-      readFile goldenFile
-    newSamples `shouldBe` goldenSamples
-  where
-    whenFails :: forall b c. IO c -> IO b -> IO b
-    whenFails = flip onException
 
-    faultyFile = mkFaultyFilePath topDir mModuleName typeName cap
-
-    writeComparisonFile newSamples = do
-      writeFile faultyFile (encodePretty newSamples)
-      putStrLn $
-        "\n" ++
-"INFO: Written the current encodings into " ++ faultyFile ++ "."
--}
 app :: Application
 app = serve testAPI server
 
 main :: IO ()
 main = do
-  mk "../__tests__/golden" (Proxy :: Proxy Person)
-  mk "../__tests__/golden" (Proxy :: Proxy Company)
+  mkGoldenFileForType 100 (Proxy :: Proxy Person) "../__tests__/golden" 
+  mkGoldenFileForType 100 (Proxy :: Proxy Company) "../__tests__/golden"
   run 8081 app

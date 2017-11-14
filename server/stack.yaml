@@ -2,9 +2,13 @@ resolver: lts-9.12
 
 packages:
 - .
+- location:
+    git: git@github.com:plow-technologies/hspec-golden-aeson.git
+    commit: 74639e14b00c2db5cc5b15213589396ab2749b8d
+  extra-dep: true
 
 extra-deps:
-- hspec-golden-aeson-0.2.0.3
+#- hspec-golden-aeson-0.3.0.0
 - quickcheck-arbitrary-adt-0.2.0.0
 
 flags: {}
