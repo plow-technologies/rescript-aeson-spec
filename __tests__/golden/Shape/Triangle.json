@@ -1,0 +1,805 @@
+{
+    "seed": 4312429026340684785,
+    "samples": [
+        {
+            "tag": "Triangle",
+            "contents": [
+                -9,
+                -9,
+                18
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -13,
+                11,
+                -12
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                17,
+                -15,
+                8
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                17,
+                -25,
+                -19
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                20,
+                0,
+                -16
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -9,
+                16,
+                -30
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -13,
+                -23,
+                -22
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                20,
+                27,
+                -2
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -15,
+                26,
+                -22
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -22,
+                -19,
+                -28
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -13,
+                8,
+                20
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -28,
+                16,
+                -20
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                22,
+                6,
+                -18
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                15,
+                24,
+                -2
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                8,
+                5,
+                -29
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -1,
+                -19,
+                22
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                28,
+                -13,
+                -5
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -21,
+                21,
+                -14
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                6,
+                -19,
+                -23
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -5,
+                -11,
+                30
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                20,
+                -26,
+                -19
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -13,
+                18,
+                23
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -23,
+                15,
+                10
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -6,
+                19,
+                1
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -7,
+                15,
+                23
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                0,
+                -14,
+                -21
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -20,
+                27,
+                -18
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -24,
+                9,
+                8
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -22,
+                -22,
+                -16
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -15,
+                29,
+                -29
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                21,
+                24,
+                -25
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                26,
+                27,
+                10
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -8,
+                -4,
+                10
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                21,
+                -12,
+                2
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                21,
+                -12,
+                10
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -11,
+                17,
+                -5
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -10,
+                17,
+                28
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -3,
+                -5,
+                3
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                29,
+                -7,
+                -10
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -21,
+                -8,
+                24
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -20,
+                -16,
+                -3
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -21,
+                -13,
+                13
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -11,
+                3,
+                -6
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -12,
+                -5,
+                -12
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                17,
+                -2,
+                -14
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -24,
+                -14,
+                29
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -18,
+                -7,
+                -6
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -25,
+                9,
+                7
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -15,
+                1,
+                16
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                8,
+                15,
+                -6
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -27,
+                -3,
+                -16
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -22,
+                7,
+                6
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -27,
+                17,
+                -26
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                9,
+                -15,
+                -7
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                8,
+                -18,
+                29
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -28,
+                10,
+                17
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                26,
+                29,
+                25
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                13,
+                17,
+                17
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                22,
+                18,
+                -25
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -14,
+                8,
+                12
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -10,
+                -1,
+                0
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                11,
+                -7,
+                -4
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -10,
+                27,
+                -19
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                6,
+                -3,
+                4
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -9,
+                26,
+                4
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -27,
+                5,
+                -17
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -24,
+                -8,
+                16
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -5,
+                12,
+                29
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -9,
+                26,
+                -22
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -7,
+                -6,
+                10
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -17,
+                21,
+                -21
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                10,
+                19,
+                27
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                23,
+                -29,
+                30
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -7,
+                -29,
+                11
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -27,
+                -28,
+                21
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -13,
+                16,
+                29
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                16,
+                -12,
+                -16
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -29,
+                -10,
+                15
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                25,
+                -29,
+                -4
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                22,
+                29,
+                -19
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                7,
+                3,
+                10
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -26,
+                -1,
+                -18
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                29,
+                -23,
+                -23
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -29,
+                -13,
+                29
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                7,
+                4,
+                14
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -27,
+                7,
+                0
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                0,
+                24,
+                -2
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                12,
+                -10,
+                18
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                0,
+                -3,
+                12
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -17,
+                -29,
+                -12
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                9,
+                -5,
+                -26
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                22,
+                5,
+                27
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                9,
+                5,
+                21
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                15,
+                7,
+                -21
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -23,
+                4,
+                3
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                1,
+                5,
+                -2
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                21,
+                -7,
+                0
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                -14,
+                -29,
+                -28
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                18,
+                23,
+                10
+            ]
+        },
+        {
+            "tag": "Triangle",
+            "contents": [
+                21,
+                -13,
+                16
+            ]
+        }
+    ]
+}

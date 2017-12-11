@@ -41,9 +41,10 @@ data Person =
 
 instance ToJSON Person
 instance FromJSON Person
+instance ToADTArbitrary Person
 instance Arbitrary Person where
   arbitrary = Person <$> arbitrary <*> arbitrary
-instance ToADTArbitrary Person
+
 
 data Company =
   Company
@@ -53,17 +54,38 @@ data Company =
 
 instance ToJSON Company
 instance FromJSON Company
+instance ToADTArbitrary Company
 instance Arbitrary Company where
   arbitrary = do
     k <- choose (0,2)
     ps <- vector k 
     Company <$> arbitrary <*> pure ps
-instance ToADTArbitrary Company
+
+data Shape
+  = Square Int Int
+  | Triangle Int Int Int
+  | Rectangle Int Int Int Int
+  deriving (Eq,Show,Generic)
+  
+instance ToJSON Shape
+instance FromJSON Shape
+instance ToADTArbitrary Shape
+instance Arbitrary Shape where
+  arbitrary =
+    oneof
+      [ Square <$> arbitrary <*> arbitrary
+      , Triangle <$> arbitrary <*> arbitrary <*> arbitrary
+      , Rectangle <$>  arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+      ]
+
+
 
 type TestAPI = "person"  :> ReqBody '[JSON] Person  :> Post '[JSON] Person
           :<|> "company" :> ReqBody '[JSON] Company :> Post '[JSON] Company
+          :<|> "shape" :> ReqBody '[JSON] Shape :> Post '[JSON] Shape
           :<|> "people"    :> ReqBody '[JSON] [Person]  :> Post '[JSON] [Person]
           :<|> "companies" :> ReqBody '[JSON] [Company] :> Post '[JSON] [Company]
+          :<|> "shapes" :> ReqBody '[JSON] [Shape] :> Post '[JSON] [Shape]
 
 testAPI :: Proxy TestAPI
 testAPI = Proxy
@@ -71,30 +93,22 @@ testAPI = Proxy
 server :: Server TestAPI
 server = (\person -> do
              liftIO $ print "person route called"
-             liftIO $ print person
              return person)
     :<|> (\company -> do
              liftIO $ print "company route called"
-             liftIO $ print company
              return company)
+    :<|> (\shape -> do
+             liftIO $ print "shape route called"
+             return shape)
     :<|> (\people -> do
              liftIO $ print "people route called"
-             result <- liftIO $ cWithGolden "../__tests__/golden/Person.json" people
-             liftIO $ print result
              return people)
     :<|> (\companies -> do
              liftIO $ print "companies route called"
-             result <- liftIO $ cWithGolden "../__tests__/golden/Company.json" companies
-             liftIO $ print result
              return companies)
-
-cWithGolden :: forall a. (Show a, Eq a, FromJSON a, ToJSON a, ToADTArbitrary a) =>
-  FilePath -> [a] -> IO Bool
-cWithGolden goldenFile as = do
-  eGoldenSamples <- eitherDecode' <$> readFile goldenFile
-  case eGoldenSamples of
-    Left _ -> return False
-    Right goldenSamples -> return $ (samples goldenSamples) == as
+    :<|> (\shapes -> do
+             liftIO $ print "shapes route called"
+             return shapes)
 
 app :: Application
 app = serve testAPI server
@@ -103,4 +117,5 @@ main :: IO ()
 main = do
   mkGoldenFileForType 100 (Proxy :: Proxy Person) "../__tests__/golden" 
   mkGoldenFileForType 100 (Proxy :: Proxy Company) "../__tests__/golden"
+  mkGoldenFileForType 100 (Proxy :: Proxy Shape) "../__tests__/golden"
   run 8081 app

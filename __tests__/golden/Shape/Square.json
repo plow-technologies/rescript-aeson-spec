@@ -1,0 +1,705 @@
+{
+    "seed": 2551957143556997567,
+    "samples": [
+        {
+            "tag": "Square",
+            "contents": [
+                22,
+                -29
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                0,
+                -14
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -20,
+                -15
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                29,
+                -17
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -3,
+                26
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                29,
+                18
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -28,
+                14
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -3,
+                18
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -28,
+                -10
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -30,
+                19
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -25,
+                27
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -26,
+                6
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                16,
+                11
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -13,
+                14
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                27,
+                -9
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -8,
+                -8
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -17,
+                17
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                25,
+                24
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                27,
+                7
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                6,
+                29
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                16,
+                -14
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -15,
+                8
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -27,
+                23
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -13,
+                -27
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -22,
+                20
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                15,
+                21
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -25,
+                10
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                25,
+                8
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -24,
+                16
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                1,
+                17
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                6,
+                -28
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                0,
+                -26
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                12,
+                -13
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -2,
+                -2
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -29,
+                -25
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                11,
+                -8
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                0,
+                -10
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                13,
+                -18
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                18,
+                11
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                11,
+                17
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                2,
+                15
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                12,
+                -22
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -26,
+                15
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -17,
+                2
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                9,
+                27
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -5,
+                -18
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                15,
+                -26
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -30,
+                20
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -8,
+                2
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                27,
+                -7
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                18,
+                -1
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -10,
+                12
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                20,
+                -23
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -4,
+                15
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -30,
+                -9
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -3,
+                -6
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -5,
+                29
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                18,
+                12
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -11,
+                -10
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -28,
+                28
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                30,
+                4
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                3,
+                -13
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                26,
+                -27
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -7,
+                -19
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                12,
+                2
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -8,
+                -22
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -17,
+                23
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                6,
+                -24
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                24,
+                -27
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -5,
+                9
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                13,
+                30
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -16,
+                20
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -11,
+                7
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                27,
+                25
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -3,
+                -29
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -23,
+                -26
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -24,
+                -15
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -10,
+                20
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                30,
+                17
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -14,
+                13
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -3,
+                29
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                29,
+                14
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                24,
+                7
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                29,
+                -29
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                26,
+                1
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -22,
+                -20
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                15,
+                -24
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -27,
+                19
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                23,
+                -12
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -2,
+                25
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -18,
+                25
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -7,
+                -7
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -7,
+                28
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                26,
+                14
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                10,
+                -20
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -14,
+                -24
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                15,
+                -16
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -1,
+                -28
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                21,
+                -30
+            ]
+        },
+        {
+            "tag": "Square",
+            "contents": [
+                -22,
+                12
+            ]
+        }
+    ]
+}

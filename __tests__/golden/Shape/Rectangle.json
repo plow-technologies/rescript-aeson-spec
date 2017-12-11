@@ -1,0 +1,905 @@
+{
+    "seed": -5269250449375097598,
+    "samples": [
+        {
+            "tag": "Rectangle",
+            "contents": [
+                9,
+                -25,
+                12,
+                -28
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                7,
+                17,
+                -19,
+                3
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -27,
+                7,
+                -28,
+                6
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -3,
+                -9,
+                -15,
+                -23
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -29,
+                25,
+                27,
+                4
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -15,
+                22,
+                -24,
+                -30
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                17,
+                10,
+                -1,
+                -18
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -11,
+                17,
+                19,
+                2
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -17,
+                -2,
+                8,
+                4
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -3,
+                15,
+                -9,
+                -2
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -7,
+                24,
+                -23,
+                -4
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -16,
+                -5,
+                7,
+                -29
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -23,
+                26,
+                -7,
+                -20
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -8,
+                4,
+                10,
+                -17
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                30,
+                14,
+                -6,
+                10
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -14,
+                20,
+                26,
+                -11
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                12,
+                -15,
+                3,
+                -24
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                16,
+                -24,
+                -23,
+                -3
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -10,
+                21,
+                26,
+                15
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                13,
+                -24,
+                -6,
+                -10
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                23,
+                16,
+                -28,
+                -3
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                7,
+                20,
+                7,
+                -25
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -2,
+                16,
+                20,
+                20
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -18,
+                -27,
+                -21,
+                -15
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -21,
+                15,
+                14,
+                29
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -21,
+                -2,
+                5,
+                5
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                9,
+                27,
+                11,
+                -4
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -21,
+                30,
+                6,
+                -25
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -25,
+                -2,
+                -15,
+                -12
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -30,
+                22,
+                -26,
+                21
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -7,
+                6,
+                -27,
+                6
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -23,
+                -6,
+                30,
+                -11
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                6,
+                1,
+                -21,
+                -4
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -15,
+                -3,
+                -25,
+                13
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                30,
+                4,
+                23,
+                20
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -12,
+                3,
+                -7,
+                5
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                12,
+                15,
+                -27,
+                19
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                19,
+                -11,
+                -16,
+                -3
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -9,
+                -20,
+                0,
+                -12
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                9,
+                20,
+                -6,
+                -18
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -30,
+                -21,
+                -26,
+                29
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -27,
+                10,
+                9,
+                14
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                1,
+                27,
+                -17,
+                -27
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -12,
+                11,
+                -1,
+                9
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -24,
+                -22,
+                -22,
+                -27
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -20,
+                7,
+                21,
+                -25
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -8,
+                -6,
+                -11,
+                -26
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                20,
+                -28,
+                -2,
+                -30
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                16,
+                -16,
+                -26,
+                11
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -24,
+                -19,
+                -10,
+                -28
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                14,
+                23,
+                29,
+                14
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -5,
+                22,
+                30,
+                19
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -3,
+                -15,
+                19,
+                27
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -5,
+                -22,
+                11,
+                -25
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                18,
+                8,
+                -12,
+                -23
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -21,
+                3,
+                25,
+                -26
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -8,
+                -28,
+                1,
+                28
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                21,
+                29,
+                1,
+                4
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                22,
+                -4,
+                -17,
+                6
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -27,
+                6,
+                0,
+                19
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                3,
+                2,
+                8,
+                -10
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                25,
+                7,
+                -21,
+                -19
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -5,
+                14,
+                -3,
+                25
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -28,
+                -16,
+                14,
+                -1
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -4,
+                18,
+                0,
+                24
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                12,
+                -18,
+                10,
+                -10
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -6,
+                -4,
+                -24,
+                28
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                18,
+                27,
+                20,
+                16
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -27,
+                -23,
+                -14,
+                29
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                5,
+                -6,
+                22,
+                -5
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -27,
+                -9,
+                5,
+                -4
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                28,
+                -29,
+                -27,
+                19
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -4,
+                16,
+                25,
+                0
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                25,
+                8,
+                27,
+                14
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                17,
+                -3,
+                11,
+                5
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -30,
+                -22,
+                -4,
+                -4
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                26,
+                -14,
+                -10,
+                -18
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -10,
+                -2,
+                22,
+                1
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                11,
+                9,
+                -15,
+                23
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -15,
+                3,
+                -17,
+                22
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -12,
+                28,
+                18,
+                10
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -13,
+                10,
+                -14,
+                24
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -5,
+                9,
+                -15,
+                16
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                16,
+                27,
+                -20,
+                -5
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                3,
+                10,
+                -28,
+                13
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                17,
+                13,
+                -1,
+                25
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -21,
+                -11,
+                -27,
+                -16
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                14,
+                16,
+                23,
+                -20
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                7,
+                -30,
+                -6,
+                2
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -11,
+                -15,
+                -27,
+                -20
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -3,
+                3,
+                -17,
+                20
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -19,
+                23,
+                3,
+                19
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                7,
+                3,
+                -16,
+                9
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                15,
+                27,
+                -6,
+                15
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                4,
+                -26,
+                26,
+                -2
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -2,
+                -15,
+                9,
+                -14
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -20,
+                14,
+                -16,
+                27
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                -18,
+                -4,
+                -28,
+                29
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                10,
+                12,
+                10,
+                -11
+            ]
+        },
+        {
+            "tag": "Rectangle",
+            "contents": [
+                12,
+                -16,
+                18,
+                -2
+            ]
+        }
+    ]
+}

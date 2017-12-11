@@ -44,7 +44,11 @@ val serverSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) ->
 val sampleServerSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> 'a list -> unit
 
 (** encode a sample of a type, POST it to a test server, receive a response and decode the response *)
-  
+
+val isJsonFile : string -> bool
+
+(** test if file name ends in ".json" *)
+
 val sampleGoldenAndServerSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> string -> unit  
 
 (** goldeSpec and sampleServerSpec *)  

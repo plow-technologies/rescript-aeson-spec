@@ -117,9 +117,16 @@ let sampleServerSpec decode encode name_of_type url values = (
   )
 )
 
+let isJsonFile fileName =
+  let items = Array.to_list (Js.String.split "." fileName) in
+  let length = Js.List.length items in
+  match Js.List.nth items (length - 1) with
+  | Some ext -> ext == "json"
+  | None -> false
+                                                           
 (* golden file and server tests *)
                                                            
-let sampleGoldenAndServerSpec decode encode name_of_type url json_file =
+let sampleGoldenAndServerFileSpec decode encode name_of_type url json_file =
   let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
   match (decodeSample decode json) with 
   | Js_result.Ok sample -> (
@@ -150,3 +157,8 @@ let sampleGoldenAndServerSpec decode encode name_of_type url json_file =
     )
   )
   | Js_result.Error message -> describe "" (fun () -> test "" (fun () -> fail message))
+
+let sampleGoldenAndServerSpec decode encode name_of_type url json_dir =
+  let filesInDir = (Js.Array.filter isJsonFile (Node.Fs.readdirSync json_dir)) in
+  Js.log filesInDir;
+  Array.iter (fun a -> sampleGoldenAndServerFileSpec decode encode name_of_type url (json_dir ^ "/" ^ a);) filesInDir
