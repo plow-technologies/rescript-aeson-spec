@@ -28,7 +28,7 @@
   "homepage": "https://github.com/plow-technologies/bs-aeson-spec#readme",
   "devDependencies": {
     "bs-platform": "^1.9.0",
-    "bs-aeson": "1.x",
+    "bs-aeson": "git+ssh://git@github.com/plow-technologies/bs-aeson.git#8e7938ce32cdef2e14dbf060f466f776331e3d55",
     "bs-node-fetch": "^0.1.2",
     "bs-jest": "reasonml-community/bs-jest"
   }
