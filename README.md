@@ -4,6 +4,6 @@ Test [bs-aeson](https://github.com/plow-technologies/bs-aeson) serialization aga
 
 ## Changes
 
-### 1.0.0
+### 1.1.0
 
 * Initiate project with a set of tests functions.
