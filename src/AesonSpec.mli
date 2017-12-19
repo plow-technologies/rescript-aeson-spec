@@ -51,4 +51,8 @@ val isJsonFile : string -> bool
 
 val sampleGoldenAndServerSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> string -> string -> string -> unit  
 
-(** goldeSpec and sampleServerSpec *)  
+(** goldenSpec and sampleServerSpec *)  
+
+val decodeIntWithResult : Js_json.t -> (int, string) Js_result.t
+
+(** helper function for ocaml-export *)

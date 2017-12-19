@@ -1,7 +1,7 @@
 {
   "name": "bs-aeson-spec",
   "version": "1.0.0",
-  "description": "",
+  "description": "Test bs-aeson against against an auto-generated servant server from ocaml-export",
   "main": "index.js",
   "scripts": {
     "build": "bsb -make-world",
@@ -28,7 +28,7 @@
   "homepage": "https://github.com/plow-technologies/bs-aeson-spec#readme",
   "devDependencies": {
     "bs-platform": "^1.9.0",
-    "bs-aeson": "1.x",
+    "bs-aeson": "^1.1.0",
     "bs-node-fetch": "^0.1.2",
     "bs-jest": "reasonml-community/bs-jest"
   }

@@ -162,3 +162,6 @@ let sampleGoldenAndServerSpec decode encode name_of_type url json_dir =
   let filesInDir = (Js.Array.filter isJsonFile (Node.Fs.readdirSync json_dir)) in
   Js.log filesInDir;
   Array.iter (fun a -> sampleGoldenAndServerFileSpec decode encode name_of_type url (json_dir ^ "/" ^ a);) filesInDir
+
+let decodeIntWithResult json =
+  Aeson.Decode.wrapResult Aeson.Decode.int json
