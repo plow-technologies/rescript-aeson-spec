@@ -133,7 +133,7 @@ let () =
   let person3 : Test.person = {name = "Jordi" ; age = 23} in
   let company : Test.company = {companyName = "Acme" ; employees = [person ; person2 ; person3]  } in
 
-  AesonSpec.goldenSpec Test.decodePerson Test.encodePerson "person" "__tests__/person.json";
+  AesonSpec.goldenSpec Test.decodePerson Test.encodePerson "person" "__tests__/golden/Person.json";
 
   AesonSpec.serverSpec Test.decodePerson Test.encodePerson "person" "http://localhost:8081/person" person;
 
