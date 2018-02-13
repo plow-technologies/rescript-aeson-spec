@@ -17,15 +17,16 @@ val encodeSample : ('a -> Js_json.t) -> 'a sample -> Js_json.t
   
 (* specs *)  
 
-val jsonRoundtripSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> Js_json.t -> (Js_json.t, string) Js.Result.t Jest.assertion
-
+val jsonRoundtripSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> Js_json.t -> Jest.assertion
+  
 (** try to encode and decode a JSON *)
   
-val sampleJsonRoundtripSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> Js_json.t -> (Js_json.t, string) Js.Result.t Jest.assertion
+val sampleJsonRoundtripSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> Js_json.t -> Jest.assertion
+  
 
 (** try to encode and decode a sample JSON of a type *)
-  
-val valueRoundtripSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> 'a -> ('a, string) Js.Result.t Jest.assertion
+
+val valueRoundtripSpec : (Js_json.t -> ('a, string) Js_result.t) -> ('a -> Js_json.t) -> 'a -> Jest.assertion
 
 (** try to encode and decode a value of a type *)
   
