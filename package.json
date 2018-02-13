@@ -26,10 +26,10 @@
     "url": "https://github.com/plow-technologies/bs-aeson-spec/issues"
   },
   "homepage": "https://github.com/plow-technologies/bs-aeson-spec#readme",
-  "devDependencies": {
-    "bs-platform": "^1.9.0",
-    "bs-aeson": "^1.1.0",
+  "dependencies": {
+    "bs-aeson": "../bs-aeson",
     "bs-node-fetch": "^0.1.2",
-    "bs-jest": "reasonml-community/bs-jest"
+    "@glennsl/bs-jest": "^0.4.1",
+    "bs-platform": "^2.2.0"
   }
 }
