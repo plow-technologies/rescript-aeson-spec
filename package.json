@@ -30,6 +30,6 @@
     "bs-aeson": "../bs-aeson",
     "@glennsl/bs-jest": "^0.3.2",
     "bs-node-fetch": "^0.1.2",
-    "bs-platform": "^2.2.0"
+    "bs-platform": "^2.1.0"
   }
 }
