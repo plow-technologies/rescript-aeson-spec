@@ -4,6 +4,14 @@ Test [bs-aeson](https://github.com/plow-technologies/bs-aeson) serialization aga
 
 ## Changes
 
+### 1.2.2
+
+* Move bs-platform to devDependencies.
+
+### 1.2.1
+
+* Fix dependency issue. 1.2.0 is broken.
+
 ### 1.2.0
 
 * Add `goldenDirSpec` function.
