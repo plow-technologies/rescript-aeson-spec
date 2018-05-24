@@ -1,15 +1,13 @@
 {
   "name": "bs-aeson-spec",
-  "version": "1.2.2",
+  "version": "2.0.0",
   "description": "Test bs-aeson against against an auto-generated servant server from ocaml-export",
   "main": "index.js",
   "scripts": {
     "build": "bsb -make-world",
+    "clean": "bsb -clean-world",
     "start": "bsb -make-world -w",
-    "test": "npm run build && jest",
-    "watch:bsb": "bsb -make-world -w",
-    "watch:jest": "jest --watchAll",
-    "watch:screen": "screen -c .screenrc"
+    "test": "npm run build && jest"
   },
   "repository": {
     "type": "git",
@@ -27,11 +25,11 @@
   },
   "homepage": "https://github.com/plow-technologies/bs-aeson-spec#readme",
   "dependencies": {
-    "bs-aeson": "^1.1.0",
+    "bs-aeson": "^2.0.0",
     "bs-node-fetch": "^0.1.2",
     "@glennsl/bs-jest": "^0.4.2"
   },
   "devDependencies": {
-    "bs-platform": ">=2.2.1"
+    "bs-platform": "^3.1.3"
   }
 }

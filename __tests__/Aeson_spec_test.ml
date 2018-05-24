@@ -23,14 +23,14 @@ module Test = struct
       ; ( "Age", Aeson.Encode.int p.age)
       ]
 
-  let decodePerson (json : Js_json.t) :(person, string) Js_result.t =
+  let decodePerson (json : Js_json.t) :(person, string) Belt.Result.t =
     match Aeson.Decode.
           { name = field "name" string json
           ; age = field "age" int json
           }
     with
-    | v -> Js_result.Ok v
-    | exception Aeson.Decode.DecodeError message -> Js_result.Error ("decodePerson: " ^ message)
+    | v -> Belt.Result.Ok v
+    | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("decodePerson: " ^ message)
 
   let encodeCompany (p : company) :Js_json.t =
     Aeson.Encode.object_
@@ -38,14 +38,14 @@ module Test = struct
       ; ( "employees", Aeson.Encode.list encodePerson p.employees)
       ]
 
-  let decodeCompany (json : Js_json.t) :(company, string) Js_result.t =
+  let decodeCompany (json : Js_json.t) :(company, string) Belt.Result.t =
     match Aeson.Decode.
           { companyName = field "companyName" string json
           ; employees = field "employees" (list (fun a -> unwrapResult (decodePerson a))) json
           }
     with
-    | v -> Js_result.Ok v
-    | exception Aeson.Decode.DecodeError message -> Js_result.Error ("decodePerson: " ^ message)
+    | v -> Belt.Result.Ok v
+    | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("decodePerson: " ^ message)
 
   let encodeShape (x : shape) :Js_json.t =
     match x with
@@ -65,7 +65,7 @@ module Test = struct
          ; ( "contents" , Aeson.Encode.array [| Aeson.Encode.int y0 ; Aeson.Encode.int y1 ; Aeson.Encode.int y2 ; Aeson.Encode.int y3|])
          ]
 
-  let decodeShape (json : Js_json.t) :(shape, string) Js_result.t =
+  let decodeShape (json : Js_json.t) :(shape, string) Belt.Result.t =
     match Aeson.Decode.(field "tag" string json) with
     | "Square" ->
        (match Aeson.Decode.(field "contents" Js.Json.decodeArray json) with
@@ -74,12 +74,12 @@ module Test = struct
             | v0 ->
                (match Aeson.Decode.int v.(1) with
                 | v1 ->
-                   Js_result.Ok (Square (v0, v1))
-                | exception Aeson.Decode.DecodeError message -> Js_result.Error ("Square: " ^ message)
+                   Belt.Result.Ok (Square (v0, v1))
+                | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("Square: " ^ message)
                )
-            | exception Aeson.Decode.DecodeError message -> Js_result.Error ("Square: " ^ message)
+            | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("Square: " ^ message)
            )
-        | None -> Js_result.Error ("Square expected an array.")
+        | None -> Belt.Result.Error ("Square expected an array.")
        )
     | "Triangle" ->
        (match Aeson.Decode.(field "contents" Js.Json.decodeArray json) with
@@ -90,14 +90,14 @@ module Test = struct
                 | v1 ->
                    (match Aeson.Decode.int v.(2) with
                     | v2 ->
-                       Js_result.Ok (Triangle (v0, v1, v2))
-                    | exception Aeson.Decode.DecodeError message -> Js_result.Error ("Triangle: " ^ message)
+                       Belt.Result.Ok (Triangle (v0, v1, v2))
+                    | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("Triangle: " ^ message)
                    )
-                | exception Aeson.Decode.DecodeError message -> Js_result.Error ("Triangle: " ^ message)
+                | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("Triangle: " ^ message)
                )
-            | exception Aeson.Decode.DecodeError message -> Js_result.Error ("Triangle: " ^ message)
+            | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("Triangle: " ^ message)
            )
-        | None -> Js_result.Error ("Triangle expected an array.")
+        | None -> Belt.Result.Error ("Triangle expected an array.")
        )
     | "Rectangle" ->
        (match Aeson.Decode.(field "contents" Js.Json.decodeArray json) with
@@ -110,19 +110,19 @@ module Test = struct
                     | v2 ->
                        (match Aeson.Decode.int v.(3) with
                         | v3 ->
-                           Js_result.Ok (Rectangle (v0, v1, v2, v3))
-                        | exception Aeson.Decode.DecodeError message -> Js_result.Error ("Rectangle: " ^ message)
+                           Belt.Result.Ok (Rectangle (v0, v1, v2, v3))
+                        | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("Rectangle: " ^ message)
                        )
-                    | exception Aeson.Decode.DecodeError message -> Js_result.Error ("Rectangle: " ^ message)
+                    | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("Rectangle: " ^ message)
                    )
-                | exception Aeson.Decode.DecodeError message -> Js_result.Error ("Rectangle: " ^ message)
+                | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("Rectangle: " ^ message)
                )
-            | exception Aeson.Decode.DecodeError message -> Js_result.Error ("Rectangle: " ^ message)
+            | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("Rectangle: " ^ message)
            )
-        | None -> Js_result.Error ("Rectangle expected an array.")
+        | None -> Belt.Result.Error ("Rectangle expected an array.")
        )
-    | err -> Js_result.Error ("Unknown tag value found '" ^ err ^ "'.")
-    | exception Aeson.Decode.DecodeError message -> Js_result.Error message
+    | err -> Belt.Result.Error ("Unknown tag value found '" ^ err ^ "'.")
+    | exception Aeson.Decode.DecodeError message -> Belt.Result.Error message
 
 end
 
