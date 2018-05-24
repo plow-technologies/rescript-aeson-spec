@@ -15,8 +15,8 @@ let decodeSampleUnsafe decode json =
 
 let decodeSample decode json =
   match decodeSampleUnsafe decode json with
-  | v -> Js_result.Ok v
-  | exception Aeson.Decode.DecodeError message -> Js_result.Error ("decodeSample: " ^ message)
+  | v -> Belt.Result.Ok v
+  | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("decodeSample: " ^ message)
 
 let encodeSample encode sample =
   Aeson.Encode.object_
@@ -30,8 +30,8 @@ external toJsObject : 'a Js.Dict.t -> < .. > Js.t = "%identity"
 
 let resultMap f r = (
   match r with
-  | Js_result.Ok(a) -> Js_result.Ok (f a)
-  | Js_result.Error(b) -> Js_result.Error (b)
+  | Belt.Result.Ok(a) -> Belt.Result.Ok (f a)
+  | Belt.Result.Error(b) -> Belt.Result.Error (b)
 )
 
 (* external functions *)
@@ -40,14 +40,14 @@ let resultMap f r = (
 
 let jsonRoundtripSpec decode encode json =
   let rDecoded = decode json in
-  expect (resultMap encode rDecoded) |> toEqual (Js_result.Ok json)
+  expect (resultMap encode rDecoded) |> toEqual (Belt.Result.Ok json)
                   
 let sampleJsonRoundtripSpec decode encode json =
   let rDecoded = decodeSample decode json in
-  expect (resultMap (fun encoded -> encodeSample encode encoded) rDecoded) |> toEqual (Js_result.Ok json)
+  expect (resultMap (fun encoded -> encodeSample encode encoded) rDecoded) |> toEqual (Belt.Result.Ok json)
 
 let valueRoundtripSpec decode encode value =
-  expect (decode (encode value)) |> toEqual (Js_result.Ok value)
+  expect (decode (encode value)) |> toEqual (Belt.Result.Ok value)
 
 (* file tests *)
 
@@ -129,7 +129,7 @@ let isJsonFile fileName =
 let sampleGoldenAndServerFileSpec decode encode name_of_type url json_file =
   let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
   match (decodeSample decode json) with 
-  | Js_result.Ok sample -> (
+  | Belt.Result.Ok sample -> (
     describe ("AesonSpec.sampleGoldenAndServerSpec: " ^ name_of_type ^ " from file '" ^ json_file ^ "'") (fun () ->
                
       test "decode then encode json_file" (fun () ->
@@ -156,7 +156,7 @@ let sampleGoldenAndServerFileSpec decode encode name_of_type url json_file =
       )
     )
   )
-  | Js_result.Error message -> describe "" (fun () -> test "" (fun () -> fail message))
+  | Belt.Result.Error message -> describe "" (fun () -> test "" (fun () -> fail message))
 
 (* run roundtrip file test on a directory *)
 let goldenDirSpec decode encode name_of_type json_dir =
