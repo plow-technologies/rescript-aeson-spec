@@ -4,6 +4,10 @@ Test [bs-aeson](https://github.com/plow-technologies/bs-aeson) serialization aga
 
 ## Changes
 
+### 2.1.0
+
+* Update bs-aeson dependency to 3.0.0.
+
 ### 2.0.0
 
 * Replace `Js.Result.t` with `Belt.Result.t`.
