@@ -1,6 +1,6 @@
 {
   "name": "bs-aeson-spec",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Test bs-aeson against against an auto-generated servant server from ocaml-export",
   "main": "index.js",
   "scripts": {
@@ -25,11 +25,12 @@
   },
   "homepage": "https://github.com/plow-technologies/bs-aeson-spec#readme",
   "dependencies": {
-    "bs-aeson": "^3.0.0",
-    "bs-node-fetch": "^0.1.2",
-    "@glennsl/bs-jest": "^0.4.2"
+    "bs-aeson": "^3.1.0",
+    "bs-fetch": "^0.3.1",
+    "bs-node-fetch": "^0.3.0",
+    "@glennsl/bs-jest": "^0.4.8"
   },
   "devDependencies": {
-    "bs-platform": "^3.1.5"
+    "bs-platform": "^4.0.18"
   }
 }
