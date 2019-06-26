@@ -126,13 +126,7 @@ module Test = struct
 
 end
 
-(* need to turn on servant server before running *)
 let () =
-  let person  : Test.person = {name = "Javier" ; age = 50} in
-  let person2 : Test.person = {name = "Joaquim" ; age = 45} in
-  let person3 : Test.person = {name = "Jordi" ; age = 23} in
-  let company : Test.company = {companyName = "Acme" ; employees = [person ; person2 ; person3]  } in
-
   AesonSpec.goldenSpec Test.decodePerson Test.encodePerson "person" "__tests__/golden/Person.json";
   
   AesonSpec.goldenDirSpec Test.decodePerson Test.encodePerson "person" "__tests__/golden/Person";
