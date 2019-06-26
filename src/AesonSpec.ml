@@ -72,21 +72,21 @@ let sampleGoldenSpec decode encode name_of_type json_file = (
 (* server tests *)
 
 let serverSpec decode encode name_of_type url value = (
-  let headers = Bs_node_fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
+  let headers = Fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
   let encodedString = Js.Json.stringify (encode value) in
   let reqInit = 
-    Bs_node_fetch.RequestInit.make
-      ~method_:Bs_node_fetch.Post
-      ~mode:Bs_node_fetch.CORS
-      ~body:(Bs_node_fetch.BodyInit.make encodedString)
+    Fetch.RequestInit.make
+      ~method_:Fetch.Post
+      ~mode:Fetch.CORS
+      ~body:(Fetch.BodyInit.make encodedString)
       ~headers:headers
       () in
   
   describe ("AesonSpec.serverSpec: " ^ name_of_type) (fun () ->
     testPromise ("encode, POST to server, receieve from server, decode: " ^ encodedString) (fun () ->
       Js.Promise.(
-        Bs_node_fetch.fetchWithInit url reqInit
-          |> then_ (fun response -> (Bs_node_fetch.Response.text response)
+        Fetch.fetchWithInit url reqInit
+          |> then_ (fun response -> (Fetch.Response.text response)
           |> then_ (fun text -> resolve (expect (Aeson.Decode.unwrapResult (decode (Js.Json.parseExn text))) |> toEqual value))
         )
       )
@@ -95,21 +95,21 @@ let serverSpec decode encode name_of_type url value = (
 )
 
 let sampleServerSpec decode encode name_of_type url values = (
-  let headers = Bs_node_fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
+  let headers = Fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
   let encodedString = Js.Json.stringify (Aeson.Encode.list encode values) in
   let reqInit = 
-    Bs_node_fetch.RequestInit.make
-      ~method_:Bs_node_fetch.Post
-      ~mode:Bs_node_fetch.CORS
-      ~body:(Bs_node_fetch.BodyInit.make encodedString)
+    Fetch.RequestInit.make
+      ~method_:Fetch.Post
+      ~mode:Fetch.CORS
+      ~body:(Fetch.BodyInit.make encodedString)
       ~headers:headers
       () in
   
   describe ("AesonSpec.sampleServerSpec: " ^ name_of_type) (fun () ->
     testPromise "encode json_file, POST encoded to server, receieve response from server, decode response" (fun () ->
       Js.Promise.(
-        Bs_node_fetch.fetchWithInit url reqInit
-          |> then_ (fun response -> (Bs_node_fetch.Response.text response)
+        Fetch.fetchWithInit url reqInit
+          |> then_ (fun response -> (Fetch.Response.text response)
           |> then_ (fun text -> resolve (expect ((Aeson.Decode.list (fun a -> Aeson.Decode.unwrapResult (decode a)) (Js.Json.parseExn text))) |> toEqual values))
         )
       )
@@ -136,20 +136,20 @@ let sampleGoldenAndServerFileSpec decode encode name_of_type url json_file =
         expect (encodeSample encode sample) |> toEqual json
       );
 
-      let headers = Bs_node_fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
+      let headers = Fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
       let encodedString = Js.Json.stringify (Aeson.Encode.list encode sample.samples) in
       let reqInit = 
-        Bs_node_fetch.RequestInit.make
-          ~method_:Bs_node_fetch.Post
-          ~mode:Bs_node_fetch.CORS
-          ~body:(Bs_node_fetch.BodyInit.make encodedString)
+        Fetch.RequestInit.make
+          ~method_:Fetch.Post
+          ~mode:Fetch.CORS
+          ~body:(Fetch.BodyInit.make encodedString)
           ~headers:headers
           () in
 
       testPromise "encode json_file, POST encoded to server, receieve response from server, decode response" (fun () ->
         Js.Promise.(
-          Bs_node_fetch.fetchWithInit url reqInit
-            |> then_ (fun response -> (Bs_node_fetch.Response.text response)
+          Fetch.fetchWithInit url reqInit
+            |> then_ (fun response -> (Fetch.Response.text response)
             |> then_ (fun text -> resolve (expect ((Aeson.Decode.list (fun a -> Aeson.Decode.unwrapResult (decode a)) (Js.Json.parseExn text))) |> toEqual sample.samples))
           )
         )

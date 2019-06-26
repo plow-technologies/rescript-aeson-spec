@@ -4,6 +4,9 @@ Test [bs-aeson](https://github.com/plow-technologies/bs-aeson) serialization aga
 
 ## Changes
 
+### 2.3.0
+* Remove bs-node-fetch dependency
+
 ### 2.2.0
 
 * Update bs-aeson dependency to 3.1.0, bs-fetch to 3.1.0, bs-node-fetch to 3.0.0, bs-jest to 0.4.8 and bs-platform to 4.0.18.
