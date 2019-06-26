@@ -134,22 +134,12 @@ let () =
   let company : Test.company = {companyName = "Acme" ; employees = [person ; person2 ; person3]  } in
 
   AesonSpec.goldenSpec Test.decodePerson Test.encodePerson "person" "__tests__/golden/Person.json";
-
-  AesonSpec.serverSpec Test.decodePerson Test.encodePerson "person" "http://localhost:8081/person" person;
-
-  AesonSpec.serverSpec Test.decodeCompany Test.encodeCompany "company" "http://localhost:8081/company" company;
   
   AesonSpec.goldenDirSpec Test.decodePerson Test.encodePerson "person" "__tests__/golden/Person";
 
   AesonSpec.goldenDirSpec Test.decodeCompany Test.encodeCompany "company" "__tests__/golden/Company";
 
   AesonSpec.goldenDirSpec Test.decodeShape Test.encodeShape "shape" "__tests__/golden/Shape";
-
-  AesonSpec.sampleGoldenAndServerSpec Test.decodePerson Test.encodePerson "person" "http://localhost:8081/people" "__tests__/golden/Person";
-
-  AesonSpec.sampleGoldenAndServerSpec Test.decodeCompany Test.encodeCompany "company" "http://localhost:8081/companies" "__tests__/golden/Company";
-
-  AesonSpec.sampleGoldenAndServerSpec Test.decodeShape Test.encodeShape "shape" "http://localhost:8081/shapes" "__tests__/golden/Shape";
   
   describe "isJsonFile" (fun () ->         
     test "" (fun () ->
