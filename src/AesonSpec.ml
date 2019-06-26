@@ -26,8 +26,6 @@ let encodeSample encode sample =
 
 (* internal functions *)
 
-external toJsObject : 'a Js.Dict.t -> < .. > Js.t = "%identity"
-
 let resultMap f r = (
   match r with
   | Belt.Result.Ok(a) -> Belt.Result.Ok (f a)
@@ -69,104 +67,17 @@ let sampleGoldenSpec decode encode name_of_type json_file = (
   )
 )
 
-(* server tests *)
-
-let serverSpec decode encode name_of_type url value = (
-  let headers = Bs_node_fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
-  let encodedString = Js.Json.stringify (encode value) in
-  let reqInit = 
-    Bs_node_fetch.RequestInit.make
-      ~method_:Bs_node_fetch.Post
-      ~mode:Bs_node_fetch.CORS
-      ~body:(Bs_node_fetch.BodyInit.make encodedString)
-      ~headers:headers
-      () in
-  
-  describe ("AesonSpec.serverSpec: " ^ name_of_type) (fun () ->
-    testPromise ("encode, POST to server, receieve from server, decode: " ^ encodedString) (fun () ->
-      Js.Promise.(
-        Bs_node_fetch.fetchWithInit url reqInit
-          |> then_ (fun response -> (Bs_node_fetch.Response.text response)
-          |> then_ (fun text -> resolve (expect (Aeson.Decode.unwrapResult (decode (Js.Json.parseExn text))) |> toEqual value))
-        )
-      )
-    )
-  )
-)
-
-let sampleServerSpec decode encode name_of_type url values = (
-  let headers = Bs_node_fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
-  let encodedString = Js.Json.stringify (Aeson.Encode.list encode values) in
-  let reqInit = 
-    Bs_node_fetch.RequestInit.make
-      ~method_:Bs_node_fetch.Post
-      ~mode:Bs_node_fetch.CORS
-      ~body:(Bs_node_fetch.BodyInit.make encodedString)
-      ~headers:headers
-      () in
-  
-  describe ("AesonSpec.sampleServerSpec: " ^ name_of_type) (fun () ->
-    testPromise "encode json_file, POST encoded to server, receieve response from server, decode response" (fun () ->
-      Js.Promise.(
-        Bs_node_fetch.fetchWithInit url reqInit
-          |> then_ (fun response -> (Bs_node_fetch.Response.text response)
-          |> then_ (fun text -> resolve (expect ((Aeson.Decode.list (fun a -> Aeson.Decode.unwrapResult (decode a)) (Js.Json.parseExn text))) |> toEqual values))
-        )
-      )
-    )
-  )
-)
-
 let isJsonFile fileName =
   let items = Array.to_list (Js.String.split "." fileName) in
   let length = Js.List.length items in
   match Js.List.nth items (length - 1) with
   | Some ext -> ext == "json"
   | None -> false
-                                                           
-(* golden file and server tests *)
-                                                           
-let sampleGoldenAndServerFileSpec decode encode name_of_type url json_file =
-  let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
-  match (decodeSample decode json) with 
-  | Belt.Result.Ok sample -> (
-    describe ("AesonSpec.sampleGoldenAndServerSpec: " ^ name_of_type ^ " from file '" ^ json_file ^ "'") (fun () ->
-               
-      test "decode then encode json_file" (fun () ->
-        expect (encodeSample encode sample) |> toEqual json
-      );
-
-      let headers = Bs_node_fetch.HeadersInit.make (toJsObject (Js_dict.fromList [("Content-Type", Js_json.string "application/json")])) in
-      let encodedString = Js.Json.stringify (Aeson.Encode.list encode sample.samples) in
-      let reqInit = 
-        Bs_node_fetch.RequestInit.make
-          ~method_:Bs_node_fetch.Post
-          ~mode:Bs_node_fetch.CORS
-          ~body:(Bs_node_fetch.BodyInit.make encodedString)
-          ~headers:headers
-          () in
-
-      testPromise "encode json_file, POST encoded to server, receieve response from server, decode response" (fun () ->
-        Js.Promise.(
-          Bs_node_fetch.fetchWithInit url reqInit
-            |> then_ (fun response -> (Bs_node_fetch.Response.text response)
-            |> then_ (fun text -> resolve (expect ((Aeson.Decode.list (fun a -> Aeson.Decode.unwrapResult (decode a)) (Js.Json.parseExn text))) |> toEqual sample.samples))
-          )
-        )
-      )
-    )
-  )
-  | Belt.Result.Error message -> describe "" (fun () -> test "" (fun () -> fail message))
 
 (* run roundtrip file test on a directory *)
 let goldenDirSpec decode encode name_of_type json_dir =
   let files_in_dir = (Js.Array.filter isJsonFile (Node.Fs.readdirSync json_dir)) in
   Array.iter (fun json_file -> sampleGoldenSpec decode encode name_of_type (json_dir ^ "/" ^ json_file);) files_in_dir
-
-let sampleGoldenAndServerSpec decode encode name_of_type url json_dir =
-  let filesInDir = (Js.Array.filter isJsonFile (Node.Fs.readdirSync json_dir)) in
-  Js.log filesInDir;
-  Array.iter (fun json_file -> sampleGoldenAndServerFileSpec decode encode name_of_type url (json_dir ^ "/" ^ json_file);) filesInDir
 
 let decodeIntWithResult json =
   Aeson.Decode.wrapResult Aeson.Decode.int json

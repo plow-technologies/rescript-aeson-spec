@@ -1,9 +1,12 @@
 {
   "name": "bs-aeson-spec",
-  "bsc-flags": ["-bs-no-version-header", "-bs-super-errors"],
+  "bsc-flags": [
+    "-bs-no-version-header",
+    "-bs-super-errors"
+  ],
   "sources": [
     {
-      "dir":    "src",
+      "dir": "src",
       "subdirs": true
     },
     {
@@ -11,6 +14,14 @@
       "type": "dev"
     }
   ],
-  "bs-dependencies": ["bs-aeson", "bs-node-fetch", "@glennsl/bs-jest"],
-  "bs-dev-dependencies": ["bs-aeson", "bs-node-fetch", "@glennsl/bs-jest"]
+  "bs-dependencies": [
+    "bs-aeson",
+    "bs-fetch",
+    "@glennsl/bs-jest"
+  ],
+  "bs-dev-dependencies": [
+    "bs-aeson",
+    "bs-fetch",
+    "@glennsl/bs-jest"
+  ]
 }
