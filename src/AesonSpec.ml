@@ -26,8 +26,6 @@ let encodeSample encode sample =
 
 (* internal functions *)
 
-external toJsObject : 'a Js.Dict.t -> < .. > Js.t = "%identity"
-
 let resultMap f r = (
   match r with
   | Belt.Result.Ok(a) -> Belt.Result.Ok (f a)
