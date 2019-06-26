@@ -4,8 +4,13 @@ Test [bs-aeson](https://github.com/plow-technologies/bs-aeson) serialization aga
 
 ## Changes
 
-### 2.3.0
-* Remove bs-node-fetch dependency
+### 3.0.0
+* Breaking change: support for testing against a server has been dropped because bs-node-fetch is not compatible with the latest bs-platform. Now this package focuses on file based testing. Golden serialization files are produced by Haskell and tested by Haskell and ReasonML.
+* Update bs-platform to 5.0.4.
+* Update bs-fetch to 0.5.0.
+* Remove bs-node-fetch dependency.
+* Remove functions: `serverSpec` and `sampleGoldenAndServerSpec`.
+* Delete Haskell server for server testing.
 
 ### 2.2.0
 
