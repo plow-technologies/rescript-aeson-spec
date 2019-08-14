@@ -134,6 +134,8 @@ let () =
   AesonSpec.goldenDirSpec Test.decodeCompany Test.encodeCompany "company" "__tests__/golden/Company";
 
   AesonSpec.goldenDirSpec Test.decodeShape Test.encodeShape "shape" "__tests__/golden/Shape";
+
+  AesonSpec.goldenDirSpec Test.decodeShape Test.encodeShape "shape" "__tests__/golden/Broken";
   
   describe "isJsonFile" (fun () ->         
     test "" (fun () ->

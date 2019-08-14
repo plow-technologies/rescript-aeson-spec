@@ -35,15 +35,55 @@ let resultMap f r = (
 (* external functions *)
 
 (* roundtrip spec : given an object 'o', encode 'o' then decode the result, the decoded result must equal 'o'. *)
-
+                  
 let jsonRoundtripSpec decode encode json =
   let rDecoded = decode json in
   expect (resultMap encode rDecoded) |> toEqual (Belt.Result.Ok json)
-                  
+
+
+let getJsonSamples json =
+  match Js.Json.decodeObject json with
+  | Some dict ->
+     (match Js_dict.get dict "samples" with
+      | Some keyValue -> Js.Json.decodeArray keyValue
+      | _ -> None
+     )
+  | _ -> None
+  
+(* let sampleJsonRoundtripSpec decode encode json =
+ *   let rDecoded = decodeSample decode json in
+ *   expect (resultMap (fun encoded -> encodeSample encode encoded) rDecoded) |> toEqual (Belt.Result.Ok json) *)
+
+(* let getFirstFail xs =
+ *   let ys = List.fold_left
+ *     (fun a b ->
+ *       match b with
+ *       | Expect.Ok -> []
+ *       | Expect.Fail _ -> a @ [b]
+ *     ) [] xs in
+ *   nth_opt ys 0 *)
+       
 let sampleJsonRoundtripSpec decode encode json =
   let rDecoded = decodeSample decode json in
-  expect (resultMap (fun encoded -> encodeSample encode encoded) rDecoded) |> toEqual (Belt.Result.Ok json)
+  match rDecoded with
+  | Belt.Result.Ok decoded ->
+     (let encoded = encodeSample encode decoded in
 
+      let a = getJsonSamples encoded in
+      let b = getJsonSamples json in
+      (match ((a,b)) with
+       | (Some(c),Some(d)) ->
+          let z = Belt.List.zip (Array.to_list c) (Array.to_list d) in
+          let xs = List.map (fun ((x,y)) -> expect x |> toEqual y) z in
+          let s = getFirstFail xs in
+          fail ""
+                 
+       | _ -> fail ""
+      )
+
+     )
+  | _ -> fail ""
+  
 let valueRoundtripSpec decode encode value =
   expect (decode (encode value)) |> toEqual (Belt.Result.Ok value)
 

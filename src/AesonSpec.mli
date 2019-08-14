@@ -18,6 +18,9 @@ val encodeSample : ('a -> Js_json.t) -> 'a sample -> Js_json.t
 (* specs *)  
 
 val jsonRoundtripSpec : (Js_json.t -> ('a, string) Belt.Result.t) -> ('a -> Js_json.t) -> Js_json.t -> Jest.assertion
+
+
+val getJsonSamples : Js_json.t -> Js_json.t array option
   
 (** try to encode and decode a JSON *)
   
