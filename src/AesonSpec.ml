@@ -1,4 +1,4 @@
-open Jest
+open InternalJest
 open Expect
 
 (* types *)
@@ -32,14 +32,16 @@ let resultMap f r = (
   | Belt.Result.Error(b) -> Belt.Result.Error (b)
 )
 
-(* external functions *)
-
-(* roundtrip spec : given an object 'o', encode 'o' then decode the result, the decoded result must equal 'o'. *)
-                  
-let jsonRoundtripSpec decode encode json =
-  let rDecoded = decode json in
-  expect (resultMap encode rDecoded) |> toEqual (Belt.Result.Ok json)
-
+let isFail x =
+  match x with
+  | Ok -> false
+  | _ -> true
+       
+let getFirstFail xs =
+  let ys = List.fold_left
+    (fun a b -> if isFail b then a @ [b] else a
+    ) [] xs in
+  Belt.List.head ys
 
 let getJsonSamples json =
   match Js.Json.decodeObject json with
@@ -50,39 +52,35 @@ let getJsonSamples json =
      )
   | _ -> None
   
-(* let sampleJsonRoundtripSpec decode encode json =
- *   let rDecoded = decodeSample decode json in
- *   expect (resultMap (fun encoded -> encodeSample encode encoded) rDecoded) |> toEqual (Belt.Result.Ok json) *)
+(* external functions *)
 
-(* let getFirstFail xs =
- *   let ys = List.fold_left
- *     (fun a b ->
- *       match b with
- *       | Expect.Ok -> []
- *       | Expect.Fail _ -> a @ [b]
- *     ) [] xs in
- *   nth_opt ys 0 *)
+(* roundtrip spec : given an object 'o', encode 'o' then decode the result, the decoded result must equal 'o'. *)
+                  
+let jsonRoundtripSpec decode encode json =
+  let rDecoded = decode json in
+  expect (resultMap encode rDecoded) |> toEqual (Belt.Result.Ok json)
        
 let sampleJsonRoundtripSpec decode encode json =
   let rDecoded = decodeSample decode json in
   match rDecoded with
   | Belt.Result.Ok decoded ->
      (let encoded = encodeSample encode decoded in
-
       let a = getJsonSamples encoded in
       let b = getJsonSamples json in
       (match ((a,b)) with
        | (Some(c),Some(d)) ->
-          let z = Belt.List.zip (Array.to_list c) (Array.to_list d) in
+          (let z = Belt.List.zip (Array.to_list c) (Array.to_list d) in
           let xs = List.map (fun ((x,y)) -> expect x |> toEqual y) z in
-          let s = getFirstFail xs in
-          fail ""
-                 
-       | _ -> fail ""
+          let os = getFirstFail xs in
+          match os with
+          | Some s -> s
+          | None -> pass
+          )
+       | _ -> fail "Did not find key 'samples'."
       )
 
      )
-  | _ -> fail ""
+  | _ -> fail "Unable to decode golden file."
   
 let valueRoundtripSpec decode encode value =
   expect (decode (encode value)) |> toEqual (Belt.Result.Ok value)
