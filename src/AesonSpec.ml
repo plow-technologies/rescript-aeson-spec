@@ -76,11 +76,11 @@ let sampleJsonRoundtripSpec decode encode json =
           | Some s -> s
           | None -> pass
           )
-       | _ -> fail "Did not find key 'samples'."
+       | _ -> fail "Did not find key 'samples'. Are you using a JSON file produced by hspec-golden-aeson?"
       )
 
      )
-  | _ -> fail "Unable to decode golden file."
+  | _ -> fail "Unable to decode golden file. Make sure the decode function matches the shape of the JSON file."
   
 let valueRoundtripSpec decode encode value =
   expect (decode (encode value)) |> toEqual (Belt.Result.Ok value)
