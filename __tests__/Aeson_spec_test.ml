@@ -1,4 +1,4 @@
-open InternalJest
+open AesonSpec_Jest
 open Expect
 
 module Test = struct
@@ -144,9 +144,10 @@ let () =
 
   AesonSpec.goldenDirSpec Test.decodeShape Test.encodeShape "shape" "__tests__/golden/Shape";
 
-  AesonSpec.goldenDirSpec Test.decodePerson Test.brokenEncodePerson "person" "__tests__/golden/Person";
-  
-  AesonSpec.goldenDirSpec Test.decodeShape Test.encodeShape "shape" "__tests__/golden/Company";
+  (* these two tests should fail *)
+  (* AesonSpec.goldenDirSpec Test.decodePerson Test.brokenEncodePerson "person" "__tests__/golden/Person";
+   * 
+   * AesonSpec.goldenDirSpec Test.decodeShape Test.encodeShape "shape" "__tests__/golden/Company"; *)
   
   describe "isJsonFile" (fun () ->         
     test "" (fun () ->

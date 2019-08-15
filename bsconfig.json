@@ -15,11 +15,9 @@
     }
   ],
   "bs-dependencies": [
-    "bs-aeson",
-    "bs-fetch"
+    "bs-aeson"
   ],
   "bs-dev-dependencies": [
-    "bs-aeson",
-    "bs-fetch"
+    "bs-aeson"
   ]
 }

@@ -1,4 +1,4 @@
-open InternalJest
+open AesonSpec_Jest
 open Expect
 
 (* types *)

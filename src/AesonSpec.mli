@@ -17,15 +17,15 @@ val encodeSample : ('a -> Js_json.t) -> 'a sample -> Js_json.t
   
 (* specs *)  
 
-val jsonRoundtripSpec : (Js_json.t -> ('a, string) Belt.Result.t) -> ('a -> Js_json.t) -> Js_json.t -> InternalJest.assertion
+val jsonRoundtripSpec : (Js_json.t -> ('a, string) Belt.Result.t) -> ('a -> Js_json.t) -> Js_json.t -> AesonSpec_Jest.assertion
   
 (** try to encode and decode a JSON *)
   
-val sampleJsonRoundtripSpec : (Js_json.t -> ('a, string) Belt.Result.t) -> ('a -> Js_json.t) -> Js_json.t -> InternalJest.assertion
+val sampleJsonRoundtripSpec : (Js_json.t -> ('a, string) Belt.Result.t) -> ('a -> Js_json.t) -> Js_json.t -> AesonSpec_Jest.assertion
 
 (** try to encode and decode a sample JSON of a type *)
 
-val valueRoundtripSpec : (Js_json.t -> ('a, string) Belt.Result.t) -> ('a -> Js_json.t) -> 'a -> InternalJest.assertion
+val valueRoundtripSpec : (Js_json.t -> ('a, string) Belt.Result.t) -> ('a -> Js_json.t) -> 'a -> AesonSpec_Jest.assertion
 
 (** try to encode and decode a value of a type *)
   
