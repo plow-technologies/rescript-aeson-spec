@@ -1,7 +1,7 @@
 {
   "name": "bs-aeson-spec",
-  "version": "3.0.0",
-  "description": "Test bs-aeson against against an auto-generated servant server from ocaml-export",
+  "version": "4.0.0",
+  "description": "Test bs-aeson encode and decode functions against golden files generated from the Haskell library hspec-golden-aeson",
   "main": "index.js",
   "scripts": {
     "build": "bsb -make-world",
@@ -25,11 +25,10 @@
   },
   "homepage": "https://github.com/plow-technologies/bs-aeson-spec#readme",
   "dependencies": {
-    "@glennsl/bs-jest": "^0.4.8",
     "bs-aeson": "^3.2.0",
-    "bs-fetch": "^0.5.0"
+    "jest": "^24.8.0"
   },
   "devDependencies": {
-    "bs-platform": "^5.0.4"
+    "bs-platform": "^5.0.6"
   }
 }

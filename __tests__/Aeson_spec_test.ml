@@ -1,4 +1,4 @@
-open Jest
+open AesonSpec_Jest
 open Expect
 
 module Test = struct
@@ -32,6 +32,15 @@ module Test = struct
     | v -> Belt.Result.Ok v
     | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("decodePerson: " ^ message)
 
+  let brokenDecodePerson (json : Js_json.t) :(person, string) Belt.Result.t =
+    match Aeson.Decode.
+          { name = field "name!!!!" string json
+          ; age = field "age!!!!!" int json
+          }
+    with
+    | v -> Belt.Result.Ok v
+    | exception Aeson.Decode.DecodeError message -> Belt.Result.Error ("decodePerson: " ^ message)
+                                                  
   let encodeCompany (p : company) :Js_json.t =
     Aeson.Encode.object_
       [ ( "companyName", Aeson.Encode.string p.companyName)
@@ -134,6 +143,11 @@ let () =
   AesonSpec.goldenDirSpec Test.decodeCompany Test.encodeCompany "company" "__tests__/golden/Company";
 
   AesonSpec.goldenDirSpec Test.decodeShape Test.encodeShape "shape" "__tests__/golden/Shape";
+
+  (* these two tests should fail *)
+  (* AesonSpec.goldenDirSpec Test.decodePerson Test.brokenEncodePerson "person" "__tests__/golden/Person";
+   * 
+   * AesonSpec.goldenDirSpec Test.decodeShape Test.encodeShape "shape" "__tests__/golden/Company"; *)
   
   describe "isJsonFile" (fun () ->         
     test "" (fun () ->

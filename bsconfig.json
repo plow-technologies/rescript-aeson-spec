@@ -15,13 +15,9 @@
     }
   ],
   "bs-dependencies": [
-    "bs-aeson",
-    "bs-fetch",
-    "@glennsl/bs-jest"
+    "bs-aeson"
   ],
   "bs-dev-dependencies": [
-    "bs-aeson",
-    "bs-fetch",
-    "@glennsl/bs-jest"
+    "bs-aeson"
   ]
 }

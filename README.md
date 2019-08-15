@@ -4,6 +4,15 @@ Test [bs-aeson](https://github.com/plow-technologies/bs-aeson) serialization aga
 
 ## Changes
 
+### 4.0.0
+
+* Breaking change: sampleJsonRoundtripSpec behavior has change slightly. It breaks up a single encode test against a golden json file into many small encode tests and fails on the first one. Previously for large files a failure in the encoding test would crash the terminal and produce too much data to be useful. Now sampleJsonRoundtripSpec gives a simpler response and does not break the terminal.
+* Update bs-platform to 5.0.6.
+* Delete bs-fetch dependency.
+* Delete bs-jest dependency.
+* Add jest dependency ^24.8.0.
+* Fork bs-jest locally to AesonSpec_Jest.ml in order to expose the assertion and modifier types.
+
 ### 3.0.0
 
 * Breaking change: support for testing against a server has been dropped because bs-node-fetch is not compatible with the latest bs-platform. Now this package focuses on file based testing. Golden serialization files are produced by Haskell and tested by Haskell and ReasonML.
