@@ -4,6 +4,10 @@ Test [bs-aeson](https://github.com/plow-technologies/bs-aeson) serialization aga
 
 ## Changes
 
+### 4.1.0
+
+* Require bs-platform 8.0.0 and bs-aeson 4.0.0 as a minimum versions.
+
 ### 4.0.0
 
 * Breaking change: sampleJsonRoundtripSpec behavior has change slightly. It breaks up a single encode test against a golden json file into many small encode tests and fails on the first one. Previously for large files a failure in the encoding test would crash the terminal and produce too much data to be useful. Now sampleJsonRoundtripSpec gives a simpler response and does not break the terminal.
