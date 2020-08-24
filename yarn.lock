@@ -610,15 +610,22 @@ browser-resolve@^1.11.3:
   dependencies:
     resolve "1.1.7"
 
-bs-aeson@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/bs-aeson/-/bs-aeson-3.2.0.tgz#f96c4d1f93a4f1cc0e1842026fd0e1f994f2ce83"
-  integrity sha512-Dj+qeZmhrDqLXuYdS1wV//OIZxq+Sdpy/7xQIfP46LF42hB6juNHiscEjIMkSEZLshEiQfsy5QffTvJqR7TNCw==
+bs-aeson@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/bs-aeson/-/bs-aeson-4.3.0.tgz#23b9dcbb14feb4969df9870f496ebed7d59b41c7"
+  integrity sha512-B8GjUPayVxndCQOfSGXUK3RI/itMtupltsaI0uDH/IBHYC8B0HxGDruVpQzpy9B6DGCpzj76JznV2gx+tWc7GQ==
+  dependencies:
+    bs-zarith "^3.0.0"
 
-bs-platform@^5.0.6:
-  version "5.0.6"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-5.0.6.tgz#88c13041fb020479800de3d82c680bf971091425"
-  integrity sha512-6Boa2VEcWJp2WJr38L7bp3J929nYha7gDarjxb070jWzgfPJ/WbzjipmSfnu2eqqk1MfjEIpBipbPz6n1NISwA==
+bs-platform@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-8.2.0.tgz#f3f4c06d5710a4c782f0ed030b1fe11e74a0a6d7"
+  integrity sha512-quvmUac/ZxGDsT7L5+6RNXrLPvLHkWFownacaqlwVoyAm770bPyupTRU49ALPGk3HpjfD5eE+lpGdOSPtuwJiA==
+
+bs-zarith@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/bs-zarith/-/bs-zarith-3.0.0.tgz#d036a16b1c386d1ccea6dd6377d9a33fbaf9567a"
+  integrity sha512-NpKzuvxBzKD1R2lcL0JMlDPU7tdrEHa0TgftKV066+urax9Sh+a5obkI/NIwyHlnFjbg0fnebLdaZpAC7p3ytw==
 
 bser@^2.0.0:
   version "2.1.0"
