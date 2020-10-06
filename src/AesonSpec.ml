@@ -7,8 +7,8 @@ type 'a sample =
   { seed : float
   ; samples : 'a list
   }
-  
-let decodeSampleUnsafe decode json =  
+
+let decodeSampleUnsafe decode json =
   { seed = Aeson.Decode.field "seed" Aeson.Decode.float json
   ; samples = Aeson.Decode.field "samples" (Aeson.Decode.list (fun a -> Aeson.Decode.unwrapResult (decode a))) json
   }
@@ -36,7 +36,7 @@ let isFail x =
   match x with
   | Ok -> false
   | _ -> true
-       
+
 let getFirstFail xs =
   let ys = List.fold_left
     (fun a b -> if isFail b then a @ [b] else a
@@ -51,15 +51,15 @@ let getJsonSamples json =
       | _ -> None
      )
   | _ -> None
-  
+
 (* external functions *)
 
 (* roundtrip spec : given an object 'o', encode 'o' then decode the result, the decoded result must equal 'o'. *)
-                  
+
 let jsonRoundtripSpec decode encode json =
   let rDecoded = decode json in
   expect (resultMap encode rDecoded) |> toEqual (Belt.Result.Ok json)
-       
+
 let sampleJsonRoundtripSpec decode encode json =
   let rDecoded = decodeSample decode json in
   match rDecoded with
@@ -80,8 +80,8 @@ let sampleJsonRoundtripSpec decode encode json =
       )
 
      )
-  | _ -> fail "Unable to decode golden file. Make sure the decode function matches the shape of the JSON file."
-  
+  | Belt.Result.Error msg -> fail ("Unable to decode golden file. Make sure the decode function matches the shape of the JSON file. Details: " ^ msg)
+
 let valueRoundtripSpec decode encode value =
   expect (decode (encode value)) |> toEqual (Belt.Result.Ok value)
 
@@ -95,7 +95,7 @@ let goldenSpec decode encode name_of_type json_file = (
     )
   )
 )
-                                                    
+
 let sampleGoldenSpec decode encode name_of_type json_file = (
   describe ("AesonSpec.sampleGoldenSpec: " ^ name_of_type ^ " from file '" ^ json_file ^ "'") (fun () ->
     let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
