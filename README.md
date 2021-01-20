@@ -4,6 +4,10 @@ Test [bs-aeson](https://github.com/plow-technologies/bs-aeson) serialization aga
 
 ## Changes
 
+### 4.2.0
+
+* Require bs-platform 8.4.2 and bs-aeson 4.4.0 as a minimum versions.
+
 ### 4.1.1
 
 * Show details on failure
