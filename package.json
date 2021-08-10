@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/plow-technologies/bs-aeson-spec#readme",
   "dependencies": {
-    "bs-aeson": "^4.4.0",
+    "bs-aeson": "git://github.com/plow-technologies/bs-aeson#87f569dd7d86612388154bcf5dece648ae2ecff9",
     "jest": "^24.8.0"
   },
   "devDependencies": {
