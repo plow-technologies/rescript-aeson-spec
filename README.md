@@ -4,6 +4,11 @@ Test [bs-aeson](https://github.com/plow-technologies/bs-aeson) serialization aga
 
 ## Changes
 
+### 4.3.0
+
+* Update bs-aeson to 4.7.0.
+* Update rescript to 10.1.2 (Remove bs-platform)
+
 ### 4.2.1
 
 * Update bs-aeson to 4.6.0.
