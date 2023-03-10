@@ -97,8 +97,28 @@ let goldenSpec decode encode name_of_type json_file = (
 )
 
 let sampleGoldenSpec decode encode name_of_type json_file = (
-  describe ("AesonSpec.sampleGoldenSpec: " ^ name_of_type ^ " from file '" ^ json_file ^ "'") (fun () ->
+  describe ("AesonSpec.sampleGoldenSpec: " ^ name_of_type ^ " from file '" ^ json_file ^ "' with encoding utf8") (fun () ->
     let json = Js.Json.parseExn (Node.Fs.readFileAsUtf8Sync json_file) in
+    test "decode then encode json_file" (fun () ->
+      sampleJsonRoundtripSpec decode encode json
+    )
+  )
+)
+
+let encodingToString encoding =
+  match encoding with
+  | `hex -> "hex"
+  | `utf8 -> "utf8"
+  | `ascii -> "ascii"
+  | `latin1 -> "latin1"
+  | `base64 -> "base64"
+  | `ucs2 -> "ucs2"
+  | `binary -> "binary"
+  | `utf16le -> "utf16le"
+
+let sampleGoldenSpecWithEncoding decode encode name_of_type json_file encoding = (
+  describe ("AesonSpec.sampleGoldenSpec: " ^ name_of_type ^ " from file '" ^ json_file ^ "' with encoding " ^ encodingToString encoding ) (fun () ->
+    let json = Js.Json.parseExn (Node.Fs.readFileSync json_file encoding) in
     test "decode then encode json_file" (fun () ->
       sampleJsonRoundtripSpec decode encode json
     )
@@ -116,6 +136,13 @@ let isJsonFile fileName =
 let goldenDirSpec decode encode name_of_type json_dir =
   let files_in_dir = (Js.Array.filter isJsonFile (Node.Fs.readdirSync json_dir)) in
   Array.iter (fun json_file -> sampleGoldenSpec decode encode name_of_type (json_dir ^ "/" ^ json_file);) files_in_dir
+
+
+(* run roundtrip file test on a directory *)
+let goldenDirSpecWithEncoding decode encode name_of_type json_dir encoding =
+  let files_in_dir = (Js.Array.filter isJsonFile (Node.Fs.readdirSync json_dir)) in
+  Array.iter (fun json_file -> sampleGoldenSpecWithEncoding decode encode name_of_type (json_dir ^ "/" ^ json_file) encoding;) files_in_dir
+
 
 let decodeIntWithResult json =
   Aeson.Decode.wrapResult Aeson.Decode.int json

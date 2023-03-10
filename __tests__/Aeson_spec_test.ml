@@ -144,6 +144,12 @@ let () =
 
   AesonSpec.goldenDirSpec Test.decodeShape Test.encodeShape "shape" "__tests__/golden/Shape";
 
+  AesonSpec.goldenDirSpecWithEncoding Test.decodePerson Test.encodePerson "person" "__tests__/golden/Person" `latin1;
+
+  AesonSpec.goldenDirSpecWithEncoding Test.decodeCompany Test.encodeCompany "company" "__tests__/golden/Company" `latin1;
+
+  AesonSpec.goldenDirSpecWithEncoding Test.decodeShape Test.encodeShape "shape" "__tests__/golden/Shape" `latin1;
+
   (* these two tests should fail *)
   (* AesonSpec.goldenDirSpec Test.decodePerson Test.brokenEncodePerson "person" "__tests__/golden/Person";
    * 

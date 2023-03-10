@@ -4,6 +4,19 @@ Test [bs-aeson](https://github.com/plow-technologies/bs-aeson) serialization aga
 
 ## Changes
 
+### 4.4.0
+* Added goldenDirSpecWithEncoding which takes an encoding from the following set 
+```
+  [ `hex 
+  | `utf8
+  | `ascii
+  | `latin1
+  | `base64
+  | `ucs2
+  | `binary
+  | `utf16le ]
+```
+
 ### 4.3.0
 
 * Update bs-aeson to 4.7.0.
