@@ -43,6 +43,8 @@ val isJsonFile : string -> bool
 
 val goldenDirSpec : (Js_json.t -> ('a, string) Belt.Result.t) -> ('a -> Js_json.t) -> string -> string -> unit
 
+val goldenDirSpecWithEncoding : (Js_json.t -> ('a, string) Belt.Result.t) -> ('a -> Js_json.t) -> string -> string -> Node.Fs.encoding -> unit
+
 (** goldenSpec and sampleServerSpec *)  
 
 val decodeIntWithResult : Js_json.t -> (int, string) Belt.Result.t
