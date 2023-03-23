@@ -1,6 +1,6 @@
 {
   "name": "bs-aeson-spec",
-  "version": "4.4.1",
+  "version": "4.4.2",
   "description": "Test bs-aeson encode and decode functions against golden files generated from the Haskell library hspec-golden-aeson",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/plow-technologies/bs-aeson-spec#readme",
   "dependencies": {
-    "bs-aeson": "^4.8.0",
+    "bs-aeson": "^4.9.0",
     "jest": "^24.8.0"
   },
   "devDependencies": {

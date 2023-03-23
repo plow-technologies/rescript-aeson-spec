@@ -4,6 +4,9 @@ Test [bs-aeson](https://github.com/plow-technologies/bs-aeson) serialization aga
 
 ## Changes
 
+### 4.4.2
+* Update bs-aeson to 4.9.0.
+
 ### 4.4.1
 * Update bs-aeson to 4.8.0.
 

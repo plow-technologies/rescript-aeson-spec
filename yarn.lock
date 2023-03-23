@@ -696,10 +696,10 @@ browserslist@^4.16.6:
     escalade "^3.1.1"
     node-releases "^1.1.73"
 
-bs-aeson@^4.8.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/bs-aeson/-/bs-aeson-4.8.0.tgz#d3a1b797bd1ccffabd7fcf1980699f70274c28e4"
-  integrity sha512-f04f9ghE2vKs4b/kUnvqSk55cLt7KruWyTp5Ef87PWaMUyOhBF/beiHJ3jmt4vdgoAxcsG9jpzXR4mBPS+fiLQ==
+bs-aeson@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/bs-aeson/-/bs-aeson-4.9.0.tgz#247f34e57c0fb1dbc41d3d93690ca3b32a67f3d9"
+  integrity sha512-rZglNa18NIsVG+uRiCuWtKyJrGdHF5X2tfSBm7i8pTu/+gRA/obSAE/yon4PTOR9kiQ9u3sRXw/rsOx7qV2qGQ==
   dependencies:
     bs-zarith "^3.2.0"
 
