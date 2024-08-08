@@ -13,7 +13,9 @@
   ],
   "bs-dependencies": [
     "@rescript/core",
-    "rescript-aeson"
+    "@glennsl/rescript-jest",
+    "rescript-aeson",
+    "rescript-nodejs"
   ],
   "bs-dev-dependencies": [
     "@glennsl/rescript-jest"

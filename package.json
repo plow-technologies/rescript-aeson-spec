@@ -25,11 +25,12 @@
   },
   "homepage": "https://github.com/plow-technologies/bs-aeson-spec#readme",
   "dependencies": {
+    "@glennsl/rescript-jest": "^0.11.0",
     "@rescript/core": "^1.5.2",
-    "rescript-aeson": "file:../rescript-aeson"
+    "rescript-aeson": "file:../rescript-aeson",
+    "rescript-nodejs": "^16.1.0"
   },
   "devDependencies": {
-    "@glennsl/rescript-jest": "^0.11.0",
     "rescript": "^11.1.3"
   }
 }

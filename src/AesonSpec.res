@@ -1,4 +1,4 @@
-open AesonSpec_Jest
+open Jest
 open Expect
 
 /* types */
@@ -12,15 +12,15 @@ let decodeSampleUnsafe = (decode, json) => {
   seed: Aeson.Decode.field("seed", Aeson.Decode.float, json),
   samples: Aeson.Decode.field(
     "samples",
-    Aeson.Decode.list(a => Aeson.Decode.unwrapResult(decode(a))),
+    x => Aeson.Decode.list(a => Aeson.Decode.unwrapResult(decode(a)), x),
     json,
   ),
 }
 
 let decodeSample = (decode, json) =>
   switch decodeSampleUnsafe(decode, json) {
-  | v => Belt.Result.Ok(v)
-  | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("decodeSample: " ++ message)
+  | v => Ok(v)
+  | exception Aeson.Decode.DecodeError(message) => Error("decodeSample: " ++ message)
   }
 
 let encodeSample = (encode, sample) =>
@@ -33,26 +33,9 @@ let encodeSample = (encode, sample) =>
 
 let resultMap = (f, r) =>
   switch r {
-  | Belt.Result.Ok(a) => Belt.Result.Ok(f(a))
-  | Belt.Result.Error(b) => Belt.Result.Error(b)
+  | Ok(a) => Ok(f(a))
+  | Error(b) => Error(b)
   }
-
-let isFail = x =>
-  switch x {
-  | Ok => false
-  | _ => true
-  }
-
-let getFirstFail = xs => {
-  let ys = List.fold_left((a, b) =>
-    if isFail(b) {
-      \"@"(a, list{b})
-    } else {
-      a
-    }
-  , list{}, xs)
-  Belt.List.head(ys)
-}
 
 let getJsonSamples = json =>
   switch Js.Json.decodeObject(json) {
@@ -70,38 +53,37 @@ let getJsonSamples = json =>
 
 let jsonRoundtripSpec = (decode, encode, json) => {
   let rDecoded = decode(json)
-  expect(resultMap(encode, rDecoded)) |> toEqual(Belt.Result.Ok(json))
+  expect(resultMap(encode, rDecoded))->toEqual(Ok(json))
 }
 
 let sampleJsonRoundtripSpec = (decode, encode, json) => {
   let rDecoded = decodeSample(decode, json)
   switch rDecoded {
-  | Belt.Result.Ok(decoded) =>
+  | Ok(decoded) =>
     let encoded = encodeSample(encode, decoded)
     let a = getJsonSamples(encoded)
     let b = getJsonSamples(json)
     switch (a, b) {
-    | (Some(c), Some(d)) =>
-      let z = Belt.List.zip(Array.to_list(c), Array.to_list(d))
-      let xs = List.map(((x, y)) => expect(x) |> toEqual(y), z)
-      let os = getFirstFail(xs)
-      switch os {
-      | Some(s) => s
-      | None => pass
-      }
+    | (Some(c), Some(d)) => Belt.Array.zip(c, d)->Array.map(pair => Ok(pair))->List.fromArray
     | _ =>
-      fail("Did not find key 'samples'. Are you using a JSON file produced by hspec-golden-aeson?")
+      list{
+        Error(
+          "Did not find key 'samples'. Are you using a JSON file produced by hspec-golden-aeson?",
+        ),
+      }
     }
-  | Belt.Result.Error(msg) =>
-    fail(
-      "Unable to decode golden file. Make sure the decode function matches the shape of the JSON file. Details: " ++
-      msg,
-    )
+  | Error(msg) =>
+    list{
+      Error(
+        "Unable to decode golden file. Make sure the decode function matches the shape of the JSON file. Details: " ++
+        msg,
+      ),
+    }
   }
 }
 
 let valueRoundtripSpec = (decode, encode, value) =>
-  expect(decode(encode(value))) |> toEqual(Belt.Result.Ok(value))
+  expect(decode(encode(value)))->toEqual(Ok(value))
 
 /* file tests */
 
@@ -109,7 +91,11 @@ let goldenSpec = (decode, encode, name_of_type, json_file) =>
   describe(
     "AesonSpec.goldenSpec: " ++ (name_of_type ++ (" from file '" ++ (json_file ++ "'"))),
     () => {
-      let json = Js.Json.parseExn(Node.Fs.readFileAsUtf8Sync(json_file))
+      let json = Js.Json.parseExn(
+        NodeJs.Fs.readFileSync(json_file)->NodeJs.Buffer.toStringWithEncoding(
+          NodeJs.StringEncoding.utf8,
+        ),
+      )
       test("decode then encode: " ++ Js.Json.stringify(json), () =>
         jsonRoundtripSpec(decode, encode, json)
       )
@@ -122,8 +108,21 @@ let sampleGoldenSpec = (decode, encode, name_of_type, json_file) =>
     (name_of_type ++
     (" from file '" ++ (json_file ++ "' with encoding utf8"))),
     () => {
-      let json = Js.Json.parseExn(Node.Fs.readFileAsUtf8Sync(json_file))
-      test("decode then encode json_file", () => sampleJsonRoundtripSpec(decode, encode, json))
+      let json = Js.Json.parseExn(
+        NodeJs.Fs.readFileSync(json_file)->NodeJs.Buffer.toStringWithEncoding(
+          NodeJs.StringEncoding.utf8,
+        ),
+      )
+      testAll(
+        "decode then encode json_file",
+        sampleJsonRoundtripSpec(decode, encode, json),
+        result => {
+          switch result {
+          | Error(msg) => fail(msg)
+          | Ok((x, y)) => expect(x)->toEqual(y)
+          }
+        },
+      )
     },
   )
 
@@ -145,13 +144,26 @@ let sampleGoldenSpecWithEncoding = (decode, encode, name_of_type, json_file, enc
     (name_of_type ++
     (" from file '" ++ (json_file ++ ("' with encoding " ++ encodingToString(encoding))))),
     () => {
-      let json = Js.Json.parseExn(Node.Fs.readFileSync(json_file, encoding))
-      test("decode then encode json_file", () => sampleJsonRoundtripSpec(decode, encode, json))
+      let json = Js.Json.parseExn(
+        NodeJs.Fs.readFileSync(json_file)->NodeJs.Buffer.toStringWithEncoding(
+          NodeJs.StringEncoding.utf8,
+        ),
+      )
+      testAll(
+        "decode then encode json_file",
+        sampleJsonRoundtripSpec(decode, encode, json),
+        result => {
+          switch result {
+          | Error(msg) => fail(msg)
+          | Ok((x, y)) => expect(x)->toEqual(y)
+          }
+        },
+      )
     },
   )
 
 let isJsonFile = fileName => {
-  let items = Array.to_list(Js.String.split(".", fileName))
+  let items = List.fromArray(Js.String.split(".", fileName))
   let length = Js.List.length(items)
   switch Js.List.nth(items, length - 1) {
   | Some(ext) => ext === "json"
@@ -161,26 +173,23 @@ let isJsonFile = fileName => {
 
 /* run roundtrip file test on a directory */
 let goldenDirSpec = (decode, encode, name_of_type, json_dir) => {
-  let files_in_dir = Js.Array.filter(isJsonFile, Node.Fs.readdirSync(json_dir))
-  Array.iter(
-    json_file => sampleGoldenSpec(decode, encode, name_of_type, json_dir ++ ("/" ++ json_file)),
-    files_in_dir,
+  let files_in_dir = Js.Array.filter(isJsonFile, NodeJs.Fs.readdirSync(json_dir))
+  Array.forEach(files_in_dir, json_file =>
+    sampleGoldenSpec(decode, encode, name_of_type, json_dir ++ ("/" ++ json_file))
   )
 }
 
 /* run roundtrip file test on a directory */
 let goldenDirSpecWithEncoding = (decode, encode, name_of_type, json_dir, encoding) => {
-  let files_in_dir = Js.Array.filter(isJsonFile, Node.Fs.readdirSync(json_dir))
-  Array.iter(
-    json_file =>
-      sampleGoldenSpecWithEncoding(
-        decode,
-        encode,
-        name_of_type,
-        json_dir ++ ("/" ++ json_file),
-        encoding,
-      ),
-    files_in_dir,
+  let files_in_dir = Js.Array.filter(isJsonFile, NodeJs.Fs.readdirSync(json_dir))
+  Array.forEach(files_in_dir, json_file =>
+    sampleGoldenSpecWithEncoding(
+      decode,
+      encode,
+      name_of_type,
+      json_dir ++ ("/" ++ json_file),
+      encoding,
+    )
   )
 }
 
