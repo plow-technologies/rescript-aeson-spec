@@ -1,4 +1,4 @@
-open AesonSpec_Jest
+open Jest
 open Expect
 
 module Test = {
@@ -58,7 +58,7 @@ module Test = {
       open Aeson.Decode
       {
         companyName: field("companyName", string, json),
-        employees: field("employees", list(a => unwrapResult(decodePerson(a))), json),
+        employees: field("employees", x => list(a => unwrapResult(decodePerson(a)), x), json),
       }
     } {
     | v => Belt.Result.Ok(v)
@@ -103,12 +103,12 @@ module Test = {
     | "Square" =>
       switch {
         open Aeson.Decode
-        field("contents", Js.Json.decodeArray, json)
+        field("contents", x => Js.Json.decodeArray(x), json)
       } {
       | Some(v) =>
-        switch Aeson.Decode.int(v[0]) {
+        switch Aeson.Decode.int(v[0]->Option.getUnsafe) {
         | v0 =>
-          switch Aeson.Decode.int(v[1]) {
+          switch Aeson.Decode.int(v[1]->Option.getUnsafe) {
           | v1 => Belt.Result.Ok(Square(v0, v1))
           | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("Square: " ++ message)
           }
@@ -119,14 +119,14 @@ module Test = {
     | "Triangle" =>
       switch {
         open Aeson.Decode
-        field("contents", Js.Json.decodeArray, json)
+        field("contents", x => Js.Json.decodeArray(x), json)
       } {
       | Some(v) =>
-        switch Aeson.Decode.int(v[0]) {
+        switch Aeson.Decode.int(v[0]->Option.getUnsafe) {
         | v0 =>
-          switch Aeson.Decode.int(v[1]) {
+          switch Aeson.Decode.int(v[1]->Option.getUnsafe) {
           | v1 =>
-            switch Aeson.Decode.int(v[2]) {
+            switch Aeson.Decode.int(v[2]->Option.getUnsafe) {
             | v2 => Belt.Result.Ok(Triangle(v0, v1, v2))
             | exception Aeson.Decode.DecodeError(message) =>
               Belt.Result.Error("Triangle: " ++ message)
@@ -141,16 +141,16 @@ module Test = {
     | "Rectangle" =>
       switch {
         open Aeson.Decode
-        field("contents", Js.Json.decodeArray, json)
+        field("contents", x => Js.Json.decodeArray(x), json)
       } {
       | Some(v) =>
-        switch Aeson.Decode.int(v[0]) {
+        switch Aeson.Decode.int(v[0]->Option.getUnsafe) {
         | v0 =>
-          switch Aeson.Decode.int(v[1]) {
+          switch Aeson.Decode.int(v[1]->Option.getUnsafe) {
           | v1 =>
-            switch Aeson.Decode.int(v[2]) {
+            switch Aeson.Decode.int(v[2]->Option.getUnsafe) {
             | v2 =>
-              switch Aeson.Decode.int(v[3]) {
+              switch Aeson.Decode.int(v[3]->Option.getUnsafe) {
               | v3 => Belt.Result.Ok(Rectangle(v0, v1, v2, v3))
               | exception Aeson.Decode.DecodeError(message) =>
                 Belt.Result.Error("Rectangle: " ++ message)
@@ -220,11 +220,11 @@ let () = {
 
   describe("isJsonFile", () =>
     test("", () => {
-      let files = Node.Fs.readdirSync("__tests__/golden/Person")
+      let files = NodeJs.Fs.readdirSync("__tests__/golden/Person")
 
-      let filename = files[0]
+      let filename = files[0]->Option.getUnsafe
 
-      expect(AesonSpec.isJsonFile(filename)) |> toEqual(true)
+      expect(AesonSpec.isJsonFile(filename))->toEqual(true)
     })
   )
 }
