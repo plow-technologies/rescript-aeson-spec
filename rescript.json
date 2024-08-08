@@ -2,22 +2,20 @@
   "name": "bs-aeson-spec",
   "bsc-flags": [
     "-bs-no-version-header",
-    "-bs-super-errors"
+    "-bs-super-errors",
+    "-open RescriptCore"
   ],
   "sources": [
     {
       "dir": "src",
       "subdirs": true
-    },
-    {
-      "dir": "__tests__",
-      "type": "dev"
     }
   ],
   "bs-dependencies": [
-    "bs-aeson"
+    "@rescript/core",
+    "rescript-aeson"
   ],
   "bs-dev-dependencies": [
-    "bs-aeson"
+    "@glennsl/rescript-jest"
   ]
 }
