@@ -1,5 +1,5 @@
 {
-  "name": "bs-aeson-spec",
+  "name": "rescript-aeson-spec",
   "bsc-flags": [
     "-bs-no-version-header",
     "-bs-super-errors",
