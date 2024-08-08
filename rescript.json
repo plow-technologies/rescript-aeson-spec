@@ -1,5 +1,5 @@
 {
-  "name": "rescript-aeson-spec",
+  "name": "@plowtech/rescript-aeson-spec",
   "bsc-flags": [
     "-bs-no-version-header",
     "-bs-super-errors",
@@ -19,7 +19,7 @@
   "bs-dependencies": [
     "@rescript/core",
     "@glennsl/rescript-jest",
-    "rescript-aeson",
+    "@plowtech/rescript-aeson",
     "rescript-nodejs"
   ],
   "bs-dev-dependencies": [

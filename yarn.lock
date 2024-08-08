@@ -487,6 +487,13 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@plowtech/rescript-aeson@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@plowtech/rescript-aeson/-/rescript-aeson-5.0.0.tgz#7d50809225c47bd2de00b9e55de5117d7fae5058"
+  integrity sha512-tddK1TcHRFGKU2JttvEA5gBUjZ0+K1/J9XoD0VXrXTHkIoRPlOTzO3SBlgVfVt3XoH0XObpRtlGrAOBnKr8USg==
+  dependencies:
+    "@rescript/core" "^1.5.2"
+
 "@rescript/core@^1.5.2":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@rescript/core/-/core-1.5.2.tgz#7c15659c2e1655ca5430dd665ca5a95ae5b64673"
@@ -2072,11 +2079,6 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
-
-"rescript-aeson@file:../rescript-aeson":
-  version "5.0.0"
-  dependencies:
-    "@rescript/core" "^1.5.2"
 
 rescript-nodejs@^16.1.0:
   version "16.1.0"
