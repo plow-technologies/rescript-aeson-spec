@@ -1,7 +1,7 @@
 {
-  "name": "bs-aeson-spec",
-  "version": "4.4.2",
-  "description": "Test bs-aeson encode and decode functions against golden files generated from the Haskell library hspec-golden-aeson",
+  "name": "@plowtech/rescript-aeson-spec",
+  "version": "5.0.0",
+  "description": "Test rescript-aeson encode and decode functions against golden files generated from the Haskell library hspec-golden-aeson",
   "main": "index.js",
   "scripts": {
     "build": "rescript build",
@@ -11,24 +11,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plow-technologies/bs-aeson-spec.git"
+    "url": "git+https://github.com/plow-technologies/rescript-aeson-spec.git"
   },
   "keywords": [
-    "bucklescript",
+    "rescript",
     "json",
     "aeson"
   ],
   "author": "mchaver",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/plow-technologies/bs-aeson-spec/issues"
+    "url": "https://github.com/plow-technologies/rescript-aeson-spec/issues"
   },
-  "homepage": "https://github.com/plow-technologies/bs-aeson-spec#readme",
+  "homepage": "https://github.com/plow-technologies/rescript-aeson-spec#readme",
   "dependencies": {
-    "bs-aeson": "^4.9.0",
-    "jest": "^24.8.0"
+    "@glennsl/rescript-jest": "^0.11.0",
+    "@plowtech/rescript-aeson": "^5.0.0",
+    "@rescript/core": "^1.5.2",
+    "rescript-nodejs": "^16.1.0"
   },
   "devDependencies": {
-    "rescript": "^10.1.2"
+    "rescript": "^11.1.3"
   }
 }
