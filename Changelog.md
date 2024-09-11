@@ -1,5 +1,8 @@
 ## Changes
 
+### 5.0.1
+* Exposed the sampleGoldenSpecWithEncoding function to the public API
+
 ### 5.0.0
 * Support for ReScript v11 with uncurried mode
 

@@ -43,6 +43,14 @@ let goldenSpec: (Js_json.t => result<'a, string>, 'a => Js_json.t, string, strin
 
 let sampleGoldenSpec: (Js_json.t => result<'a, string>, 'a => Js_json.t, string, string) => unit
 
+let sampleGoldenSpecWithEncoding: (
+  Js.Json.t => Belt.Result.t<'a, string>,
+  Aeson.Encode.encoder<'a>,
+  string,
+  string,
+  [< #ascii | #base64 | #binary | #hex | #latin1 | #ucs2 | #utf16le | #utf8],
+) => unit
+
 @@ocaml.text(
   " encode a sample of a type, POST it to a test server, receive a response and decode the response "
 )

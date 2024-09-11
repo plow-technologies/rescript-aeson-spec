@@ -1,6 +1,6 @@
 {
   "name": "@plowtech/rescript-aeson-spec",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Test rescript-aeson encode and decode functions against golden files generated from the Haskell library hspec-golden-aeson",
   "main": "index.js",
   "scripts": {
