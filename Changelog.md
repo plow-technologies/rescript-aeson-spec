@@ -2,6 +2,7 @@
 
 ### 5.0.1
 * Exposed the sampleGoldenSpecWithEncoding function to the public API
+* Upgraded to rescript 11.1.4
 
 ### 5.0.0
 * Support for ReScript v11 with uncurried mode
