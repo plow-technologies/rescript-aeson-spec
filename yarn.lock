@@ -2085,10 +2085,10 @@ rescript-nodejs@^16.1.0:
   resolved "https://registry.yarnpkg.com/rescript-nodejs/-/rescript-nodejs-16.1.0.tgz#2278d8880d9e4a5c46cd845d5ac4ee2bd69277ee"
   integrity sha512-RyXGIEsb8UhuShf5PwKcTkYNPz+cPQ0CZq74lbYCbCa5YFidbmiIWpQhCMtpsgP1PkLClhKGDkfZfmwwNOil4Q==
 
-rescript@^11.1.3:
-  version "11.1.3"
-  resolved "https://registry.yarnpkg.com/rescript/-/rescript-11.1.3.tgz#f285c988c64d7d9c397fca615ac2412681e4144e"
-  integrity sha512-bI+yxDcwsv7qE34zLuXeO8Qkc2+1ng5ErlSjnUIZdrAWKoGzHXpJ6ZxiiRBUoYnoMsgRwhqvrugIFyNgWasmsw==
+rescript@^11.1.4:
+  version "11.1.4"
+  resolved "https://registry.yarnpkg.com/rescript/-/rescript-11.1.4.tgz#9a42ebc4fc5363707e39cef5b3188160b63bee42"
+  integrity sha512-0bGU0bocihjSC6MsE3TMjHjY0EUpchyrREquLS8VsZ3ohSMD+VHUEwimEfB3kpBI1vYkw3UFZ3WD8R28guz/Vw==
 
 resolve-cwd@^3.0.0:
   version "3.0.0"
