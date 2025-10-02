@@ -1,6 +1,6 @@
 ## Changes
 
-### 6.0.0
+### 7.0.0
 * Upgrade dependences: @glennsl/rescript-jest and @plowtech/rescript-aeson.
 
 ### 5.0.1
