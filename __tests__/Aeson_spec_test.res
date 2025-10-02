@@ -70,14 +70,14 @@ module Test = {
     | Square(y0, y1) =>
       Aeson.Encode.object_(list{
         ("tag", Aeson.Encode.string("Square")),
-        ("contents", Aeson.Encode.array([Aeson.Encode.int(y0), Aeson.Encode.int(y1)])),
+        ("contents", Aeson.Encode.jsonArray([Aeson.Encode.int(y0), Aeson.Encode.int(y1)])),
       })
     | Triangle(y0, y1, y2) =>
       Aeson.Encode.object_(list{
         ("tag", Aeson.Encode.string("Triangle")),
         (
           "contents",
-          Aeson.Encode.array([Aeson.Encode.int(y0), Aeson.Encode.int(y1), Aeson.Encode.int(y2)]),
+          Aeson.Encode.jsonArray([Aeson.Encode.int(y0), Aeson.Encode.int(y1), Aeson.Encode.int(y2)]),
         ),
       })
     | Rectangle(y0, y1, y2, y3) =>
@@ -85,7 +85,7 @@ module Test = {
         ("tag", Aeson.Encode.string("Rectangle")),
         (
           "contents",
-          Aeson.Encode.array([
+          Aeson.Encode.jsonArray([
             Aeson.Encode.int(y0),
             Aeson.Encode.int(y1),
             Aeson.Encode.int(y2),
