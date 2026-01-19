@@ -40,7 +40,7 @@ let goldenSpec: (JSON.t => result<'a, string>, 'a => JSON.t, string, string) => 
 let sampleGoldenSpec: (JSON.t => result<'a, string>, 'a => JSON.t, string, string) => unit
 
 let sampleGoldenSpecWithEncoding: (
-  JSON.t => Belt.Result.t<'a, string>,
+  JSON.t => result<'a, string>,
   Aeson.Encode.encoder<'a>,
   string,
   string,

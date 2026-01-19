@@ -23,7 +23,7 @@ module Test = {
       ("Age", Aeson.Encode.int(p.age)),
     })
 
-  let decodePerson = (json: JSON.t): Belt.Result.t<person, string> =>
+  let decodePerson = (json: JSON.t): result<person, string> =>
     switch {
       open Aeson.Decode
       {
@@ -31,11 +31,11 @@ module Test = {
         age: field("age", int, json),
       }
     } {
-    | v => Belt.Result.Ok(v)
-    | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("decodePerson: " ++ message)
+    | v => Ok(v)
+    | exception Aeson.Decode.DecodeError(message) => Error("decodePerson: " ++ message)
     }
 
-  let brokenDecodePerson = (json: JSON.t): Belt.Result.t<person, string> =>
+  let brokenDecodePerson = (json: JSON.t): result<person, string> =>
     switch {
       open Aeson.Decode
       {
@@ -43,8 +43,8 @@ module Test = {
         age: field("age!!!!!", int, json),
       }
     } {
-    | v => Belt.Result.Ok(v)
-    | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("decodePerson: " ++ message)
+    | v => Ok(v)
+    | exception Aeson.Decode.DecodeError(message) => Error("decodePerson: " ++ message)
     }
 
   let encodeCompany = (p: company): JSON.t =>
@@ -53,7 +53,7 @@ module Test = {
       ("employees", Aeson.Encode.list(encodePerson, p.employees)),
     })
 
-  let decodeCompany = (json: JSON.t): Belt.Result.t<company, string> =>
+  let decodeCompany = (json: JSON.t): result<company, string> =>
     switch {
       open Aeson.Decode
       {
@@ -61,8 +61,8 @@ module Test = {
         employees: field("employees", x => list(a => unwrapResult(decodePerson(a)), x), json),
       }
     } {
-    | v => Belt.Result.Ok(v)
-    | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("decodePerson: " ++ message)
+    | v => Ok(v)
+    | exception Aeson.Decode.DecodeError(message) => Error("decodePerson: " ++ message)
     }
 
   let encodeShape = (x: shape): JSON.t =>
@@ -99,7 +99,7 @@ module Test = {
       })
     }
 
-  let decodeShape = (json: JSON.t): Belt.Result.t<shape, string> =>
+  let decodeShape = (json: JSON.t): result<shape, string> =>
     switch {
       open Aeson.Decode
       field("tag", string, json)
@@ -113,12 +113,12 @@ module Test = {
         switch Aeson.Decode.int(v[0]->Option.getUnsafe) {
         | v0 =>
           switch Aeson.Decode.int(v[1]->Option.getUnsafe) {
-          | v1 => Belt.Result.Ok(Square(v0, v1))
-          | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("Square: " ++ message)
+          | v1 => Ok(Square(v0, v1))
+          | exception Aeson.Decode.DecodeError(message) => Error("Square: " ++ message)
           }
-        | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("Square: " ++ message)
+        | exception Aeson.Decode.DecodeError(message) => Error("Square: " ++ message)
         }
-      | None => Belt.Result.Error("Square expected an array.")
+      | None => Error("Square expected an array.")
       }
     | "Triangle" =>
       switch {
@@ -131,16 +131,14 @@ module Test = {
           switch Aeson.Decode.int(v[1]->Option.getUnsafe) {
           | v1 =>
             switch Aeson.Decode.int(v[2]->Option.getUnsafe) {
-            | v2 => Belt.Result.Ok(Triangle(v0, v1, v2))
-            | exception Aeson.Decode.DecodeError(message) =>
-              Belt.Result.Error("Triangle: " ++ message)
+            | v2 => Ok(Triangle(v0, v1, v2))
+            | exception Aeson.Decode.DecodeError(message) => Error("Triangle: " ++ message)
             }
-          | exception Aeson.Decode.DecodeError(message) =>
-            Belt.Result.Error("Triangle: " ++ message)
+          | exception Aeson.Decode.DecodeError(message) => Error("Triangle: " ++ message)
           }
-        | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("Triangle: " ++ message)
+        | exception Aeson.Decode.DecodeError(message) => Error("Triangle: " ++ message)
         }
-      | None => Belt.Result.Error("Triangle expected an array.")
+      | None => Error("Triangle expected an array.")
       }
     | "Rectangle" =>
       switch {
@@ -155,22 +153,19 @@ module Test = {
             switch Aeson.Decode.int(v[2]->Option.getUnsafe) {
             | v2 =>
               switch Aeson.Decode.int(v[3]->Option.getUnsafe) {
-              | v3 => Belt.Result.Ok(Rectangle(v0, v1, v2, v3))
-              | exception Aeson.Decode.DecodeError(message) =>
-                Belt.Result.Error("Rectangle: " ++ message)
+              | v3 => Ok(Rectangle(v0, v1, v2, v3))
+              | exception Aeson.Decode.DecodeError(message) => Error("Rectangle: " ++ message)
               }
-            | exception Aeson.Decode.DecodeError(message) =>
-              Belt.Result.Error("Rectangle: " ++ message)
+            | exception Aeson.Decode.DecodeError(message) => Error("Rectangle: " ++ message)
             }
-          | exception Aeson.Decode.DecodeError(message) =>
-            Belt.Result.Error("Rectangle: " ++ message)
+          | exception Aeson.Decode.DecodeError(message) => Error("Rectangle: " ++ message)
           }
-        | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("Rectangle: " ++ message)
+        | exception Aeson.Decode.DecodeError(message) => Error("Rectangle: " ++ message)
         }
-      | None => Belt.Result.Error("Rectangle expected an array.")
+      | None => Error("Rectangle expected an array.")
       }
-    | err => Belt.Result.Error("Unknown tag value found '" ++ (err ++ "'."))
-    | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error(message)
+    | err => Error("Unknown tag value found '" ++ (err ++ "'."))
+    | exception Aeson.Decode.DecodeError(message) => Error(message)
     }
 }
 
