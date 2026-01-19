@@ -1,5 +1,8 @@
 ## Changes
 
+### 8.0.0
+* Upgrade to ReScript v12
+
 ### 7.0.0
 * Upgrade dependences: @glennsl/rescript-jest and @plowtech/rescript-aeson.
 
