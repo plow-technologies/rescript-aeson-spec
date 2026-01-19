@@ -11,19 +11,19 @@ module Test = {
     | Triangle(int, int, int)
     | Rectangle(int, int, int, int)
 
-  let encodePerson = (p: person): Js_json.t =>
+  let encodePerson = (p: person): JSON.t =>
     Aeson.Encode.object_(list{
       ("name", Aeson.Encode.string(p.name)),
       ("age", Aeson.Encode.int(p.age)),
     })
 
-  let brokenEncodePerson = (p: person): Js_json.t =>
+  let brokenEncodePerson = (p: person): JSON.t =>
     Aeson.Encode.object_(list{
       ("Name", Aeson.Encode.string(p.name)),
       ("Age", Aeson.Encode.int(p.age)),
     })
 
-  let decodePerson = (json: Js_json.t): Belt.Result.t<person, string> =>
+  let decodePerson = (json: JSON.t): Belt.Result.t<person, string> =>
     switch {
       open Aeson.Decode
       {
@@ -35,7 +35,7 @@ module Test = {
     | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("decodePerson: " ++ message)
     }
 
-  let brokenDecodePerson = (json: Js_json.t): Belt.Result.t<person, string> =>
+  let brokenDecodePerson = (json: JSON.t): Belt.Result.t<person, string> =>
     switch {
       open Aeson.Decode
       {
@@ -47,13 +47,13 @@ module Test = {
     | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("decodePerson: " ++ message)
     }
 
-  let encodeCompany = (p: company): Js_json.t =>
+  let encodeCompany = (p: company): JSON.t =>
     Aeson.Encode.object_(list{
       ("companyName", Aeson.Encode.string(p.companyName)),
       ("employees", Aeson.Encode.list(encodePerson, p.employees)),
     })
 
-  let decodeCompany = (json: Js_json.t): Belt.Result.t<company, string> =>
+  let decodeCompany = (json: JSON.t): Belt.Result.t<company, string> =>
     switch {
       open Aeson.Decode
       {
@@ -65,7 +65,7 @@ module Test = {
     | exception Aeson.Decode.DecodeError(message) => Belt.Result.Error("decodePerson: " ++ message)
     }
 
-  let encodeShape = (x: shape): Js_json.t =>
+  let encodeShape = (x: shape): JSON.t =>
     switch x {
     | Square(y0, y1) =>
       Aeson.Encode.object_(list{
@@ -77,7 +77,11 @@ module Test = {
         ("tag", Aeson.Encode.string("Triangle")),
         (
           "contents",
-          Aeson.Encode.jsonArray([Aeson.Encode.int(y0), Aeson.Encode.int(y1), Aeson.Encode.int(y2)]),
+          Aeson.Encode.jsonArray([
+            Aeson.Encode.int(y0),
+            Aeson.Encode.int(y1),
+            Aeson.Encode.int(y2),
+          ]),
         ),
       })
     | Rectangle(y0, y1, y2, y3) =>
@@ -95,7 +99,7 @@ module Test = {
       })
     }
 
-  let decodeShape = (json: Js_json.t): Belt.Result.t<shape, string> =>
+  let decodeShape = (json: JSON.t): Belt.Result.t<shape, string> =>
     switch {
       open Aeson.Decode
       field("tag", string, json)
@@ -103,7 +107,7 @@ module Test = {
     | "Square" =>
       switch {
         open Aeson.Decode
-        field("contents", x => Js.Json.decodeArray(x), json)
+        field("contents", x => JSON.Decode.array(x), json)
       } {
       | Some(v) =>
         switch Aeson.Decode.int(v[0]->Option.getUnsafe) {
@@ -119,7 +123,7 @@ module Test = {
     | "Triangle" =>
       switch {
         open Aeson.Decode
-        field("contents", x => Js.Json.decodeArray(x), json)
+        field("contents", x => JSON.Decode.array(x), json)
       } {
       | Some(v) =>
         switch Aeson.Decode.int(v[0]->Option.getUnsafe) {
@@ -141,7 +145,7 @@ module Test = {
     | "Rectangle" =>
       switch {
         open Aeson.Decode
-        field("contents", x => Js.Json.decodeArray(x), json)
+        field("contents", x => JSON.Decode.array(x), json)
       } {
       | Some(v) =>
         switch Aeson.Decode.int(v[0]->Option.getUnsafe) {
