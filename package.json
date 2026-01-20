@@ -26,7 +26,7 @@
   "homepage": "https://github.com/plow-technologies/rescript-aeson-spec#readme",
   "dependencies": {
     "@glennsl/rescript-jest": "^0.13.1",
-    "@plowtech/rescript-aeson": "^7.0.0",
+    "@plowtech/rescript-aeson": "^8.0.0",
     "rescript-nodejs": "^16.1.0"
   },
   "devDependencies": {

@@ -613,17 +613,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@plowtech/rescript-aeson@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@plowtech/rescript-aeson/-/rescript-aeson-7.0.0.tgz#4b80b34d64700287ef0a6171a44de17307246a9c"
-  integrity sha512-jh0A3udRUlEiSZizN3Ed17FM2xrNNXc3VTL6yTrbJ6i+sNld6Fk67nLQR2gM9tJcmcPDhoAep2PRH0dyD/1bow==
-  dependencies:
-    "@rescript/core" "^1.2.0"
-
-"@rescript/core@^1.2.0":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@rescript/core/-/core-1.6.1.tgz#159670c94d64a2b8236f46be2bf09a007b1ece08"
-  integrity sha512-vyb5k90ck+65Fgui+5vCja/mUfzKaK3kOPT4Z6aAJdHLH1eljEi1zKhXroCiCtpNLSWp8k4ulh1bdB5WS0hvqA==
+"@plowtech/rescript-aeson@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@plowtech/rescript-aeson/-/rescript-aeson-8.0.0.tgz#08f375a2fc8bbd9447106b834e42bce571b095fd"
+  integrity sha512-7jBfqZPuNPoVJlDWYgL02uuQIyUV1Mr6tQLT7HU+qjmgmabkXEsJmk1W09MWxnbCt8sX+PsRbihYqm7Heg+2mQ==
 
 "@rescript/darwin-arm64@12.1.0":
   version "12.1.0"
