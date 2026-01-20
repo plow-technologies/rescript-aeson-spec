@@ -3,48 +3,44 @@ type sample<'a> = {
   samples: list<'a>,
 }
 
-let decodeSampleUnsafe: (Js_json.t => result<'a, string>, Js_json.t) => sample<'a>
+let decodeSampleUnsafe: (JSON.t => result<'a, string>, JSON.t) => sample<'a>
 
 @@ocaml.text(" decode sample from a JSON but throw an exception if it is unable to decode ")
 
-let decodeSample: (Js_json.t => result<'a, string>, Js_json.t) => result<sample<'a>, string>
+let decodeSample: (JSON.t => result<'a, string>, JSON.t) => result<sample<'a>, string>
 
 @@ocaml.text(" decode sample from a JSON and return it as Belt.Result ")
 
-let encodeSample: ('a => Js_json.t, sample<'a>) => Js_json.t
+let encodeSample: ('a => JSON.t, sample<'a>) => JSON.t
 
 @@ocaml.text(" encode sample into a JSON ")
 
 /* specs */
 
-let jsonRoundtripSpec: (
-  Js_json.t => result<'a, string>,
-  'a => Js_json.t,
-  Js_json.t,
-) => Jest.assertion
+let jsonRoundtripSpec: (JSON.t => result<'a, string>, 'a => JSON.t, JSON.t) => Jest.assertion
 
 @@ocaml.text(" try to encode and decode a JSON ")
 
 let sampleJsonRoundtripSpec: (
-  Js_json.t => result<'a, string>,
-  'a => Js_json.t,
-  Js_json.t,
-) => list<result<(Js.Json.t, Js.Json.t), string>>
+  JSON.t => result<'a, string>,
+  'a => JSON.t,
+  JSON.t,
+) => list<result<(JSON.t, JSON.t), string>>
 
 @@ocaml.text(" try to encode and decode a sample JSON of a type ")
 
-let valueRoundtripSpec: (Js_json.t => result<'a, string>, 'a => Js_json.t, 'a) => Jest.assertion
+let valueRoundtripSpec: (JSON.t => result<'a, string>, 'a => JSON.t, 'a) => Jest.assertion
 
 @@ocaml.text(" try to encode and decode a value of a type ")
 
-let goldenSpec: (Js_json.t => result<'a, string>, 'a => Js_json.t, string, string) => unit
+let goldenSpec: (JSON.t => result<'a, string>, 'a => JSON.t, string, string) => unit
 
 @@ocaml.text(" decode and encode a golden file ")
 
-let sampleGoldenSpec: (Js_json.t => result<'a, string>, 'a => Js_json.t, string, string) => unit
+let sampleGoldenSpec: (JSON.t => result<'a, string>, 'a => JSON.t, string, string) => unit
 
 let sampleGoldenSpecWithEncoding: (
-  Js.Json.t => Belt.Result.t<'a, string>,
+  JSON.t => result<'a, string>,
   Aeson.Encode.encoder<'a>,
   string,
   string,
@@ -59,11 +55,11 @@ let isJsonFile: string => bool
 
 @@ocaml.text(" test if file name ends in \".json\" ")
 
-let goldenDirSpec: (Js_json.t => result<'a, string>, 'a => Js_json.t, string, string) => unit
+let goldenDirSpec: (JSON.t => result<'a, string>, 'a => JSON.t, string, string) => unit
 
 let goldenDirSpecWithEncoding: (
-  Js_json.t => result<'a, string>,
-  'a => Js_json.t,
+  JSON.t => result<'a, string>,
+  'a => JSON.t,
   string,
   string,
   [< #ascii | #base64 | #binary | #hex | #latin1 | #ucs2 | #utf16le | #utf8],
@@ -71,4 +67,4 @@ let goldenDirSpecWithEncoding: (
 
 @@ocaml.text(" goldenSpec and sampleServerSpec ")
 
-let decodeIntWithResult: Js_json.t => result<int, string>
+let decodeIntWithResult: JSON.t => result<int, string>

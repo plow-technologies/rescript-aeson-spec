@@ -38,10 +38,10 @@ let resultMap = (f, r) =>
   }
 
 let getJsonSamples = json =>
-  switch Js.Json.decodeObject(json) {
+  switch JSON.Decode.object(json) {
   | Some(dict) =>
-    switch Js_dict.get(dict, "samples") {
-    | Some(keyValue) => Js.Json.decodeArray(keyValue)
+    switch Dict.get(dict, "samples") {
+    | Some(keyValue) => JSON.Decode.array(keyValue)
     | _ => None
     }
   | _ => None
@@ -91,12 +91,12 @@ let goldenSpec = (decode, encode, name_of_type, json_file) =>
   describe(
     "AesonSpec.goldenSpec: " ++ (name_of_type ++ (" from file '" ++ (json_file ++ "'"))),
     () => {
-      let json = Js.Json.parseExn(
+      let json = JSON.parseOrThrow(
         NodeJs.Fs.readFileSync(json_file)->NodeJs.Buffer.toStringWithEncoding(
           NodeJs.StringEncoding.utf8,
         ),
       )
-      test("decode then encode: " ++ Js.Json.stringify(json), () =>
+      test("decode then encode: " ++ JSON.stringify(json), () =>
         jsonRoundtripSpec(decode, encode, json)
       )
     },
@@ -108,7 +108,7 @@ let sampleGoldenSpec = (decode, encode, name_of_type, json_file) =>
     (name_of_type ++
     (" from file '" ++ (json_file ++ "' with encoding utf8"))),
     () => {
-      let json = Js.Json.parseExn(
+      let json = JSON.parseOrThrow(
         NodeJs.Fs.readFileSync(json_file)->NodeJs.Buffer.toStringWithEncoding(
           NodeJs.StringEncoding.utf8,
         ),
@@ -144,7 +144,7 @@ let sampleGoldenSpecWithEncoding = (decode, encode, name_of_type, json_file, enc
     (name_of_type ++
     (" from file '" ++ (json_file ++ ("' with encoding " ++ encodingToString(encoding))))),
     () => {
-      let json = Js.Json.parseExn(
+      let json = JSON.parseOrThrow(
         NodeJs.Fs.readFileSync(json_file)->NodeJs.Buffer.toStringWithEncoding(
           NodeJs.StringEncoding.utf8,
         ),
@@ -164,8 +164,8 @@ let sampleGoldenSpecWithEncoding = (decode, encode, name_of_type, json_file, enc
 
 let isJsonFile = fileName => {
   let items = List.fromArray(Js.String.split(".", fileName))
-  let length = Js.List.length(items)
-  switch Js.List.nth(items, length - 1) {
+  let length = List.length(items)
+  switch List.get(items, length - 1) {
   | Some(ext) => ext === "json"
   | None => false
   }

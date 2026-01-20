@@ -1,6 +1,6 @@
 {
   "name": "@plowtech/rescript-aeson-spec",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "Test rescript-aeson encode and decode functions against golden files generated from the Haskell library hspec-golden-aeson",
   "main": "index.js",
   "scripts": {
@@ -25,12 +25,11 @@
   },
   "homepage": "https://github.com/plow-technologies/rescript-aeson-spec#readme",
   "dependencies": {
-    "@glennsl/rescript-jest": "plow-technologies/rescript-jest#v11-upgrade",
-    "@plowtech/rescript-aeson": "^7.0.0",
-    "@rescript/core": "^1.5.2",
+    "@glennsl/rescript-jest": "^0.13.1",
+    "@plowtech/rescript-aeson": "^8.0.0",
     "rescript-nodejs": "^16.1.0"
   },
   "devDependencies": {
-    "rescript": "^11.1.4"
+    "rescript": "^12.1.0"
   }
 }
